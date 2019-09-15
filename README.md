@@ -11,7 +11,7 @@ REST Api template to be used on personal projects and for learning purposes.
 - Cleaner, more readable async code;
 - Think like that: when you install Express, you buy a complete and ready to consume pizza,  
   when you install Koa, you buy only the dough. So you have to buy all other ingredients  
-  manually yourself and mix them with the dough yourself. 🍕
+  manually and mix them with the dough yourself. 🍕
 
 
 ## Source Links:
