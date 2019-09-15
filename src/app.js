@@ -13,7 +13,11 @@ const app = new koa();
 app
   .use(logger())
   .use(async ctx => {
-  ctx.body = "Hello world!";
+    ctx.type = 'application/json';
+    ctx.body = {
+      status: "success",
+      response: "Welcome to koa api template!"
+    };
   });
 
 module.exports = app;

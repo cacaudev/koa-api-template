@@ -14,6 +14,9 @@ const server_config = {
   env: process.env.NODE_ENV || 'development'
 };
 
-app.listen(server_config.port, () => {
+const server = app.listen(server_config.port, () => {
   console.log(`Koa api server listening on ${server_config.port}, in ${server_config.env} mode`);
 });
+
+module.exports = server;
+
