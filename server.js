@@ -4,13 +4,16 @@
  * Author: cacaudev
  * Date: 12/09/2019
 */
+
 'use strict';
 
-const koa = require('koa');
-const app = new koa();
+const app = require('./app')
 
-app.use(async ctx => {
-  ctx.body = "Hello world!";
+const server_config = {
+  port: process.env.PORT || 3000,
+  env: process.env.NODE_ENV || 'development'
+};
+
+app.listen(server_config.port, () => {
+  console.log(`Koa api server listening on ${server_config.port}, in ${server_config.env} mode`);
 });
-
-app.listen(3000);
