@@ -1,45 +1,43 @@
 /*
  * Name: app.js
- * Description: App entry point.
- * Author: cacaudev
- * Date: 12/09/2019
+ * Description: App configuration file.
+ * Author: Cacaudev
+ * Date: 27/09/2019
 */
 
 'use strict';
 
-import koa from 'koa';
+import Koa from 'koa';
 import morgan from 'koa-morgan';
+import { body_parser } from './middlewares'
 import Logger from './loaders/logger';
 
-const server_config = {
-  port: process.env.PORT || 3000,
-  env: process.env.NODE_ENV || 'development'
-};
+class App extends Koa {
+  constructor(...params) {
+    super(...params);
+    // Trust proxy
+    this.proxy = true;
+    // Disable `console.errors` except development env
+    this.silent = this.env !== 'development';
+    this.setMiddlewares();
+  }
 
-async function startServer() {
-  const app = new koa();
-
-  app
-    .use(morgan('tiny', { stream: Logger.stream }))
-    .use(async ctx => {
+  setMiddlewares() {
+    this.use(
+      body_parser({
+        enableTypes: ['json'],
+        jsonLimit: '5mb'
+      })
+    );
+    this.use(morgan('tiny', { stream: Logger.stream }));
+    this.use(async ctx => {
       ctx.type = 'application/json';
       ctx.body = {
         status: "success",
         response: "Welcome to koa api template!"
       };
     });
-
-  app.listen(server_config.port, err => {
-    if (err)
-      Logger.error(err);
-    else
-      Logger.info(`
-      ##########################################
-       Koa Server listening on port: ${server_config.port},
-       in ${server_config.env} mode
-      ##########################################
-    `);
-  });
+  }
 }
 
-startServer();
+export default App;
