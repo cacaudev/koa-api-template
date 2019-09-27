@@ -22,7 +22,8 @@
     "dotenv": "^8.1.0",
     "koa": "^2.8.1",
     "koa-body": "^4.1.1",
-    "koa-logger": "^3.2.1"
+    "koa-morgan": "^1.0.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
