@@ -1,0 +1,10 @@
+{
+  "development": {
+    "url": "DEVELOPMENT_DATABASE_URL",
+    "logging": false,
+    "operatorsAliases": false,
+    "dialectOptions": {
+      "ssl": false
+    }
+  }
+}
