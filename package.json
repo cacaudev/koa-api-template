@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node src/index.js",
+    "start": "npm run lint && babel-node src/index.js",
     "dev": "npm run lint && nodemon --exec babel-node src/index.js",
     "lint": "npx eslint src/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,6 +29,9 @@
     "koa": "^2.8.1",
     "koa-bodyparser": "^4.2.1",
     "koa-morgan": "^1.0.1",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.19.2",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -37,6 +40,7 @@
     "@babel/preset-env": "^7.6.2",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.5.1",
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "sequelize-cli": "^5.5.1"
   }
 }
