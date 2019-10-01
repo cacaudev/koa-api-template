@@ -7,6 +7,13 @@
 
 'use strict';
 
+import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: path.resolve(__dirname + '../../config/.env')
+});
+
 import App from './app';
 import Logger from './loaders/logger';
 
@@ -23,10 +30,8 @@ app.on('error', err => {
 
 const server = app.listen(server_config.port, () => {
   Logger.info(`
-    ##########################################
     Koa Server listening on port: ${server_config.port},
     in ${server_config.env} mode
-   ##########################################
    `);
 });
 
