@@ -4,8 +4,14 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
+const dotenv = require('dotenv');
+
+dotenv.config({
+  path: path.resolve(__dirname + '../../config/.env')
+});
+
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = require(__dirname + '/../config.js')[env];
 const db = {};
 
 const loggingEnv = config.logging;
@@ -27,19 +33,11 @@ if (config.url) {
   sequelize
     .authenticate()
     .then(() => {
-      console.log('Connection to database has been established successfully.');
+      console.log(`Connection to ${process.env.NODE_ENV} database has been established successfully.`);
     })
     .catch(err => {
-      console.error('Unable to connect to the database:', err);
+      console.error(`Unable to connect to the ${process.env.NODE_ENV} database:`, err);
     });
-
-} else {
-  sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
-  );
 }
 
 fs
