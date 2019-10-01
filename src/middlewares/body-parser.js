@@ -15,4 +15,4 @@ export function body_parser(options = {}) {
       console.log('Error: Invalid format is detected in the request body');
     }
   });
-};
+}

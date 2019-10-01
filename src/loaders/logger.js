@@ -37,7 +37,7 @@ var Logger = winston.createLogger({
  * to track http requests output
  */
 Logger.stream = {
-  write: function (message, encoding) {
+  write: function (message) {
     Logger.info(message);
   },
 };

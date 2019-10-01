@@ -9,7 +9,7 @@
 
 import Koa from 'koa';
 import morgan from 'koa-morgan';
-import { body_parser } from './middlewares'
+import { body_parser } from './middlewares';
 import Logger from './loaders/logger';
 
 class App extends Koa {
@@ -33,8 +33,8 @@ class App extends Koa {
     this.use(async ctx => {
       ctx.type = 'application/json';
       ctx.body = {
-        status: "success",
-        response: "Welcome to koa api template!"
+        status: 'success',
+        response: 'Welcome to koa api template!'
       };
     });
   }
