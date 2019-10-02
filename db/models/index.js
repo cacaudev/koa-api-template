@@ -4,12 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const dotenv = require('dotenv');
-
-dotenv.config({
-  path: path.resolve(__dirname + '../../config/.env')
-});
-
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config.js')[env];
 const db = {};
@@ -19,9 +13,9 @@ const operatorsAliasesEnv = config.operatorsAliases;
 const dialectOptionsEnv = config.dialectOptions;
 
 let sequelize;
-if (config.url) {
+if (config.database_url) {
   sequelize = new Sequelize(
-    process.env[config.url],
+    config.database_url,
     {
       logging: loggingEnv,
       operatorsAliases: operatorsAliasesEnv,
@@ -38,7 +32,10 @@ if (config.url) {
     .catch(err => {
       console.error(`Unable to connect to the ${process.env.NODE_ENV} database:`, err);
     });
-}
+} else
+  console.error(`
+    Database url do not exist on db config file for the requested env mode.
+  `);
 
 fs
   .readdirSync(__dirname)
