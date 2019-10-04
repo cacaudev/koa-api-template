@@ -4,10 +4,11 @@ import bodyParser from 'koa-bodyparser';
 
 /**
  * Return middleware that parses HTTP request body.
- * @param {Object} [options={}]
- * @return {function} Koa middleware.
+ * @module body_parser
+ * @param {Object} [options={enableTypes: Array of strings, jsonLimit: String}]
+ * @return {function} Body parser function.
+ * @throws {InvalidMediaType} When the request format is invalid.
  */
-
 export function body_parser(options = {}) {
   return bodyParser({
     ...options,

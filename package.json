@@ -7,6 +7,7 @@
     "start": "npm run lint && babel-node src/index.js",
     "dev": "npm run lint && nodemon --exec babel-node src/index.js",
     "lint": "npx eslint src/**/*.js",
+    "generate:docs": "npx jsdoc -c ./conf.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -40,6 +41,7 @@
     "@babel/preset-env": "^7.6.2",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.5.1",
+    "jsdoc": "^3.6.3",
     "nodemon": "^1.19.2",
     "sequelize-cli": "^5.5.1"
   }

@@ -9,20 +9,9 @@
 import winston from 'winston';
 
 /**
- * Winston log types that can be used and
- * their priority level
- * [
-    emerg,
-    alert: 1,
-    crit: 2,
-    error: 3,
-    warning: 4,
-    notice: 5,
-    info: 6,
-    debug: 7
-  ]
-*/
-
+ * Instantiate an Winston Logger.
+ * @module Logger
+ */
 var Logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
@@ -35,6 +24,8 @@ var Logger = winston.createLogger({
 /**
  * Stream function is used by Morgan log module
  * to track http requests output
+ * @alias module:Logger.stream
+ * @param {string} message - Message to log on console
  */
 Logger.stream = {
   write: function (message) {

@@ -12,7 +12,17 @@ import morgan from 'koa-morgan';
 import { body_parser } from './middlewares';
 import Logger from './loaders/logger';
 
+/**
+ * Class representing an Koa App.
+ * @extends Koa
+ */
 class App extends Koa {
+  /**
+   * Create an App.
+   * Enable proxy, silent logging for
+   * production env and set middlewares.
+   * @constructor
+   */
   constructor(...params) {
     super(...params);
     // Trust proxy
@@ -22,6 +32,10 @@ class App extends Koa {
     this.setMiddlewares();
   }
 
+  /**
+   * Set middlewares for the
+   * app instance.
+   */
   setMiddlewares() {
     this.use(
       body_parser({
