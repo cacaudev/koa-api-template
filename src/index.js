@@ -17,6 +17,11 @@ dotenv.config({
 import App from './app';
 import Logger from './loaders/logger';
 
+/**
+ * @type {Object}
+ * @property {string} port - App port. Default is 3000.
+ * @property {string} env - App env. Default is development.
+ */
 const server_config = {
   port: process.env.PORT || 3000,
   env: process.env.NODE_ENV || 'development'

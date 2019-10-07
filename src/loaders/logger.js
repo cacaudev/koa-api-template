@@ -22,10 +22,13 @@ var Logger = winston.createLogger({
 });
 
 /**
- * Stream function is used by Morgan log module
+ * @summary Stream function is used by Morgan log module
  * to track http requests output
- * @alias module:Logger.stream
+ * @member {function} Stream
  * @param {string} message - Message to log on console
+ *
+ * @example
+ * morgan('tiny', { stream: Logger.stream })
  */
 Logger.stream = {
   write: function (message) {
