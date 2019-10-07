@@ -10,6 +10,7 @@
 import Koa from 'koa';
 import morgan from 'koa-morgan';
 import cors from '@koa/cors';
+import helmet from 'koa-helmet';
 import { body_parser } from './middlewares';
 import Logger from './loaders/logger';
 
@@ -37,6 +38,7 @@ class App extends Koa {
    */
   setMiddlewares() {
     this.use(cors());
+    this.use(helmet());
     this.use(morgan('tiny', { stream: Logger.stream }));
     this.use(
       body_parser({
