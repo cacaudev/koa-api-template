@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/cacaudev/koa-api-template#readme",
   "dependencies": {
+    "@koa/cors": "^3.0.0",
     "dotenv": "^8.1.0",
     "koa": "^2.8.1",
     "koa-bodyparser": "^4.2.1",

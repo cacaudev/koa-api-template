@@ -9,6 +9,7 @@
 
 import Koa from 'koa';
 import morgan from 'koa-morgan';
+import cors from '@koa/cors';
 import { body_parser } from './middlewares';
 import Logger from './loaders/logger';
 
@@ -17,7 +18,7 @@ class App extends Koa {
    * @summary Create an Koa App instance.
    * @class
    * @property {boolean} proxy - Proxy header fields will be trusted
-   * @property {string} silent - Disable `console.errors` except development env
+   * @property {string} silent - Disable `console.errors` except in development env
    * @returns {App} App instance
    *
    * @example
@@ -35,13 +36,14 @@ class App extends Koa {
    * @method
    */
   setMiddlewares() {
+    this.use(cors());
+    this.use(morgan('tiny', { stream: Logger.stream }));
     this.use(
       body_parser({
         enableTypes: ['json'],
         jsonLimit: '5mb'
       })
     );
-    this.use(morgan('tiny', { stream: Logger.stream }));
     this.use(async ctx => {
       ctx.type = 'application/json';
       ctx.body = {
