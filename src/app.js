@@ -16,7 +16,8 @@ class App extends Koa {
   /**
    * @summary Create an Koa App instance.
    * @class
-   *
+   * @property {boolean} proxy - Proxy header fields will be trusted
+   * @property {string} silent - Disable `console.errors` except development env
    * @returns {App} App instance
    *
    * @example
@@ -24,9 +25,7 @@ class App extends Koa {
    */
   constructor(...params) {
     super(...params);
-    // Trust proxy
     this.proxy = true;
-    // Disable `console.errors` except development env
     this.silent = this.env !== 'development';
     this.setMiddlewares();
   }
