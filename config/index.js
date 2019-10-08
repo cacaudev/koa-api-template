@@ -1,3 +1,10 @@
+/*
+ * Name: app.js
+ * Description: Env variables configuration file.
+ * Author: Cacaudev
+ * Date: 07/10/2019
+*/
+
 'use strict';
 
 import dotenv from 'dotenv';
@@ -21,6 +28,9 @@ const app_config = {
   base: {
     env,
     port: process.env.PORT || 3000,
+    api: {
+      prefix: '/v1'
+    }
   },
   development: {
     port: process.env.PORT || 8080,

@@ -12,6 +12,7 @@ import morgan from 'koa-morgan';
 import cors from '@koa/cors';
 import helmet from 'koa-helmet';
 import { body_parser } from './middlewares';
+import app_router from './routes';
 import Logger from './loaders/logger';
 
 class App extends Koa {
@@ -33,26 +34,37 @@ class App extends Koa {
   }
 
   /**
-   * @summary setMiddlewares
+   * @desc Middlewares that will be executed before the controllers.
+   * The call order is important.
    * @method
    */
   setMiddlewares() {
+    /**
+     * Enable Cross Origin Resource Sharing to all origins by default
+     */
     this.use(cors());
+    /**
+     * Basic node security
+     */
     this.use(helmet());
+    /**
+     * Main app logger
+     */
     this.use(morgan('tiny', { stream: Logger.stream }));
+    /**
+     * Parse request payload
+     */
+    this.use(body_parser({
+      enableTypes: ['json'],
+      jsonLimit: '5mb'
+    }));
+    /**
+     * Load API routes
+     */
     this.use(
-      body_parser({
-        enableTypes: ['json'],
-        jsonLimit: '5mb'
-      })
+      app_router.routes(),
+      app_router.allowedMethods()
     );
-    this.use(async ctx => {
-      ctx.type = 'application/json';
-      ctx.body = {
-        status: 'success',
-        response: 'Welcome to koa api template!'
-      };
-    });
   }
 }
 
