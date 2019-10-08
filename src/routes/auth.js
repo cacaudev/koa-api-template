@@ -1,14 +1,16 @@
 /*
  * Name: user.js
- * Description: Router for user resource endpoints.
+ * Description: Router for auth resource endpoints.
  * Author: Cacaudev
  * Date: 08/10/2019
 */
 
 'use strict';
 
+import { SignUp_Validator } from '../validators';
+
 // TODO: Temporary controller function
-async function user_route(ctx) {
+async function auth_route(ctx) {
   ctx.type = 'application/json';
   ctx.body = {
     status: 'success',
@@ -22,8 +24,17 @@ async function user_route(ctx) {
  * @param {Router} main_router - Main router from app
  */
 export default (Router, main_router) => {
-  const user_router = new Router;
-  user_router.prefix('/user');
-  user_router.get('/', user_route);
-  main_router.use(user_router.routes());
+  const auth_router = new Router;
+  auth_router.prefix('/auth');
+
+  auth_router.get(
+    '/',
+    auth_route
+  );
+  auth_router.post(
+    '/signup',
+    SignUp_Validator
+  );
+
+  main_router.use(auth_router.routes());
 };

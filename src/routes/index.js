@@ -8,7 +8,7 @@
 'use strict';
 
 import Router from 'koa-router';
-import user from './user';
+import auth from './auth';
 import config from '../../config';
 
 let app_router = Router({
@@ -28,11 +28,11 @@ async function main_route(ctx) {
 app_router.get('/', main_route);
 
 /*
-* Load all route dependencies.
-* Pass Koa Router Instance as a parameter
-* so just have to import once.
+ * Load all route dependencies.
+ * Pass Koa Router Instance as a parameter
+ * so just have to import once.
 */
-user(Router, app_router);
+auth(Router, app_router);
 
 app_router.all('/*', async (ctx) => {
   ctx.body = {

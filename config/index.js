@@ -8,8 +8,6 @@
 'use strict';
 
 import dotenv from 'dotenv';
-
-// Load environment variables from .env file
 dotenv.config();
 
 /**
@@ -40,6 +38,9 @@ const app_config = {
   }
 };
 
-const config = Object.assign(app_config.base, app_config[env]);
+const config = Object.assign(
+  app_config.base,
+  app_config[env]
+);
 
 module.exports = config;
