@@ -22,22 +22,27 @@ export default (Router, main_router) => {
     '/signup',
     SignUp_Validator,
     async (ctx) => {
-      const user_credentials = ctx.request.body;
-      console.log('TCL: user_credentials', user_credentials);
+      const user_data = ctx.request.body;
 
-      let service = new AuthService();
-
-
-      // Call service layer
       try {
-        await service.Signup(user_credentials);
+        // Call service layer
+        const authServiceInstance = new AuthService();
+        const user_record = await authServiceInstance.Signup(user_data);
+
+        // Return response to client
+        ctx.status = 201;
+        ctx.body = { user: user_record };
+
       } catch (err) {
-        console.log('err ', err);
+        ctx.status = 400;
+        ctx.body = {
+          status: 'failed',
+          message: {
+            error: err
+          }
+        };
       }
 
-      // Return response to client
-      ctx.status = 201;
-      ctx.body = 'Passed through signup';
       return;
     }
   );
