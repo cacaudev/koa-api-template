@@ -7,6 +7,7 @@ REST Api template to be used on personal projects and for learning purposes.
 Use principle of separation of concerns to move the business logic away from the API routes.
 
 So, the structure will be like this:
+
 ![alt text](./API_Layers_Structure.png)
 
 ## First things first:
