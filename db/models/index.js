@@ -13,9 +13,10 @@ const operatorsAliasesEnv = config.operatorsAliases;
 const dialectOptionsEnv = config.dialectOptions;
 
 let sequelize;
-if (config.database_url) {
+
+if (config.url) {
   sequelize = new Sequelize(
-    config.database_url,
+    config.url,
     {
       logging: loggingEnv,
       operatorsAliases: operatorsAliasesEnv,
