@@ -11,7 +11,7 @@ class AuthService {
    *
    * @example
    * const auth_instance = new AuthService();
- */
+   */
 
   constructor() {
     this.userModel = User;

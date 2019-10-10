@@ -25,14 +25,11 @@ export default (Router, main_router) => {
       const user_data = ctx.request.body;
 
       try {
-        // Call service layer
         const authServiceInstance = new AuthService();
         const user_record = await authServiceInstance.Signup(user_data);
 
-        // Return response to client
         ctx.status = 201;
         ctx.body = { user: user_record };
-
       } catch (err) {
         ctx.status = 400;
         ctx.body = {
@@ -42,7 +39,6 @@ export default (Router, main_router) => {
           }
         };
       }
-
       return;
     }
   );

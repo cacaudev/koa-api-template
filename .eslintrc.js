@@ -10,7 +10,7 @@ module.exports = {
       "error",
       2
     ],
-    "max-len": [2, 120, 8],
+    "max-len": [2, 80, 8],
     "linebreak-style": [
       "error",
       "unix"
