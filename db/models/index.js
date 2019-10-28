@@ -5,7 +5,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config.js')[env];
+const config = require(__dirname + '/../../config/db.js')[env];
 const db = {};
 
 const loggingEnv = config.logging;
@@ -28,14 +28,16 @@ if (config.url) {
   sequelize
     .authenticate()
     .then(() => {
-      console.log(`Connection to ${process.env.NODE_ENV} database has been established successfully.`);
+      console.log(`
+        Connection to ${env} database has been established successfully.
+      `);
     })
     .catch(err => {
-      console.error(`Unable to connect to the ${process.env.NODE_ENV} database:`, err);
+      console.error(`Unable to connect to the ${env} database:`, err);
     });
 } else
   console.error(`
-    Database url do not exist on db config file for the requested env mode.
+    Database url do not exist on db config file for the requested env=${env} mode.
   `);
 
 fs
