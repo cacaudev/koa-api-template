@@ -4,8 +4,6 @@
  * Author: Cacaudev
  * Date: 01/11/2019
 */
-
-
 'use strict';
 
 const i18next = require('i18next');

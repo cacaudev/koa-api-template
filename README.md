@@ -10,7 +10,7 @@ So, the structure will be like this:
 
 ![alt text](./API_Layers_Structure.png)
 
-## First things first:
+## First things first
 
 ### Why use Koa and not Express?
 - Koa is more lightweight, with just 500 lines of code;
@@ -20,6 +20,24 @@ So, the structure will be like this:
   when you install Koa, you buy only the dough. So you have to buy all other ingredients
   manually and mix them with the dough yourself. 🍕
 
-
-## Source Links:
+## Source Links
 - Express/Koa/Hapi Comparison: https://nodesource.com/blog/Express-Koa-Hapi
+
+## Roadmap
+- [x] Koa Configuration
+- [x] Babel Configuration
+- [x] ESLint Configuration
+- [x] Sequelize Layer (Db acess and model implementation)
+- [x] Middleware Layer examples
+- [x] API Validation layer (Joi)
+- [x] Service Layer examples
+- [x] Logging 'Layer' (Koa-morgan, Winston)
+- [x] i18n Support (i18next)
+- [ ] Errors Emitter Layer
+- [ ] Dependency Injection (Awilix)
+- [ ] JSDoc with Swagger Documentation
+- [ ] Unit tests (Mocha or Jest)
+- [ ] Status Monitor
+- [ ] Deploy server on Heroku
+- [ ] Continuous integration with TravisCI
+
