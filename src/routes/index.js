@@ -10,17 +10,19 @@
 import Router from 'koa-router';
 import auth from './auth';
 import config from '../../config';
+import LocaleService from '../services/locale';
 
 let app_router = Router({
   prefix: config.api.prefix
 });
 
-// TODO: Temporary controller function
 async function main_route(ctx) {
+  let i18n = await new LocaleService(ctx.request.query.locale);
+
   ctx.type = 'application/json';
   ctx.body = {
     status: 'success',
-    response: 'Main route'
+    response: i18n._t('info:welcome')
   };
   return;
 }
@@ -36,7 +38,7 @@ auth(Router, app_router);
 
 app_router.all('/*', async (ctx) => {
   ctx.body = {
-    status: 'fail',
+    status: 'false',
     response: 'Route inexistent.'
   };
   return;
