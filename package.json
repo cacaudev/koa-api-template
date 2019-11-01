@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run lint && babel-node src/index.js",
-    "dev": "npm run lint && nodemon --exec babel-node src/index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
     "lint": "npx eslint src/**/*.js",
     "doc": "npx jsdoc -c ./conf.json",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +27,7 @@
   "homepage": "https://github.com/cacaudev/koa-api-template#readme",
   "dependencies": {
     "@koa/cors": "^3.0.0",
+    "awilix": "^4.2.2",
     "dotenv": "^8.1.0",
     "i18next": "^18.0.1",
     "koa": "^2.8.1",

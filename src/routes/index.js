@@ -8,16 +8,16 @@
 'use strict';
 
 import Router from 'koa-router';
-import auth from './auth';
+import auth from './auth.route';
 import config from '../../config';
-import LocaleService from '../services/locale';
+import { LocaleService } from '../services';
 
 let app_router = Router({
   prefix: config.api.prefix
 });
 
 async function main_route(ctx) {
-  let i18n = await new LocaleService(ctx.request.query.locale);
+  let i18n = new LocaleService(ctx.request.query.locale);
 
   ctx.type = 'application/json';
   ctx.body = {

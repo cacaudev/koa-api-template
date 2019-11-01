@@ -1,3 +1,3 @@
 'use strict';
 
-export * from './auth';
+export * from './auth.validator';

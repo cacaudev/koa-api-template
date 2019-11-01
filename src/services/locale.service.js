@@ -7,7 +7,7 @@
 
 'use strict';
 
-const i18next = require('../../config/i18n');
+const i18next = require('../../config/i18n.config');
 
 class LocaleService {
   /**
@@ -64,4 +64,4 @@ class LocaleService {
   }
 }
 
-export default LocaleService;
+module.exports = { LocaleService };

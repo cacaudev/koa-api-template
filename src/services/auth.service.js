@@ -34,4 +34,4 @@ class AuthService {
   }
 }
 
-export default AuthService;
+module.exports = { AuthService };
