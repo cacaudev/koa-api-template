@@ -8,7 +8,8 @@ module.exports = {
   "rules": {
     "indent": [
       "error",
-      2
+      2,
+      { "SwitchCase": 1 }
     ],
     "max-len": [2, 90, 8],
     "linebreak-style": [
