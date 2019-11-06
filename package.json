@@ -3,12 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "10.17.0",
+    "npm": "6.11.3"
+  },
   "scripts": {
     "start": "npm run lint && babel-node src/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "npx eslint src/**/*.js",
     "doc": "npx jsdoc -c ./conf.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create:db": "npx sequelize db:create",
+    "migrate:db": "npx sequelize db:migrate",
+    "seed:db": "npx sequelize db:seed:all",
+    "reset:db": "npm run create:db && npm run migrate:db && npm run seed:db"
   },
   "repository": {
     "type": "git",
@@ -40,6 +48,7 @@
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.19.2",
+    "swagger-jsdoc": "^3.4.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
