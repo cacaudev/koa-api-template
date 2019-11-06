@@ -8,32 +8,20 @@
 'use strict';
 
 import Router from 'koa-router';
-import auth from './auth.route';
+import auth from './auth.router';
+import main from './main.router';
 import config from '../../config';
-import { LocaleService } from '../services';
 
-let app_router = Router({
+let app_router = new Router({
   prefix: config.api.prefix
 });
-
-async function main_route(ctx) {
-  let i18n = new LocaleService(ctx.request.query.locale);
-
-  ctx.type = 'application/json';
-  ctx.body = {
-    status: 'success',
-    response: i18n._t('info:welcome')
-  };
-  return;
-}
-
-app_router.get('/', main_route);
 
 /*
  * Load all route dependencies.
  * Pass Koa Router Instance as a parameter
  * so just have to import once.
 */
+main(Router, app_router);
 auth(Router, app_router);
 
 app_router.all('/*', async (ctx) => {
