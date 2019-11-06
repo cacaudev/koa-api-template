@@ -1,5 +1,5 @@
 /*
- * Name: user.js
+ * Name: auth.router.js
  * Description: Router for auth resource endpoints.
  * Author: Cacaudev
  * Date: 08/10/2019
@@ -12,9 +12,9 @@ import { AuthController } from '../controllers';
 
 /**
  * @param {Router} Router - Koa Router instance
- * @param {Router} main_router - Main router from app
+ * @param {Router} app_router - app router from app
  */
-export default (Router, main_router) => {
+export default (Router, app_router) => {
   const auth_router = new Router;
   auth_router.prefix('/auth');
 
@@ -26,5 +26,5 @@ export default (Router, main_router) => {
     authController.SignUp
   );
 
-  main_router.use(auth_router.routes());
+  app_router.use(auth_router.routes());
 };
