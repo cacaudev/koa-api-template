@@ -29,8 +29,7 @@ class AuthService {
    * let user_record = await authServiceInstance.Signup(user_data);
    */
   async Signup(user_input) {
-    const UserRecord = await this.userModel.create(user_input);
-    return UserRecord;
+    return await this.userModel.create(user_input);
   }
 }
 
