@@ -33,7 +33,8 @@ So, the structure will be like this:
 - [x] Service Layer examples
 - [x] Logging 'Layer' (Koa-morgan, Winston)
 - [x] i18n Support (i18next)
-- [ ] Errors Emitter Layer
+- [x] Response Formatter 'Layer'
+- [x] Errors Emitter 'Layer'
 - [ ] Dependency Injection (Awilix)
 - [ ] JSDoc with Swagger Documentation
 - [ ] Unit tests (Mocha or Jest)
