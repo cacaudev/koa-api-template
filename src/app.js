@@ -11,7 +11,10 @@ import Koa from 'koa';
 import morgan from 'koa-morgan';
 import cors from '@koa/cors';
 import helmet from 'koa-helmet';
-import { body_parser } from './middlewares';
+import {
+  Body_Parser,
+  Error_Handler
+} from './middlewares';
 import app_router from './routes';
 import Logger from './loaders/logger';
 
@@ -52,9 +55,13 @@ class App extends Koa {
      */
     this.use(morgan('tiny', { stream: Logger.stream }));
     /**
+     *
+     */
+    this.use(Error_Handler);
+    /**
      * Parse request payload
      */
-    this.use(body_parser({
+    this.use(Body_Parser({
       enableTypes: ['json'],
       jsonLimit: '5mb'
     }));
@@ -65,9 +72,6 @@ class App extends Koa {
       app_router.routes(),
       app_router.allowedMethods()
     );
-
-    //console.log('routes: ');
-    //console.log(app_router.stack.map(i => i.path));
   }
 }
 

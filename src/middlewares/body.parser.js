@@ -1,3 +1,8 @@
+/*
+ * Description: Format request response.
+ * Author: Cacaudev
+ * Date: 01/11/2019
+*/
 'use strict';
 
 import bodyParser from 'koa-bodyparser';
@@ -11,7 +16,7 @@ import Logger from '../loaders/logger';
  * @return {function} Convert request body to JSON type
  * @throws {InvalidMediaType} When the request format is invalid.
  */
-export function body_parser(options = {}) {
+export function Body_Parser(options = {}) {
   return bodyParser({
     ...options,
     onerror: () => {

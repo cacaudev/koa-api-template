@@ -1,13 +1,12 @@
 'use strict';
 
-
 import { LocaleService } from '../services';
 import swaggerSpec from '../../config/swagger.config';
 import appInfo from '../../package.json';
 import os from 'os';
+import Response from '../utils';
 
 class MainController {
-
   async getApiInfo(ctx) {
     let i18n = new LocaleService(ctx.request.query.locale);
 
@@ -24,21 +23,14 @@ class MainController {
       environments
     };
 
-    ctx.type = 'application/json';
-    ctx.body = {
-      status: 'success',
-      response: {
-        message: i18n._t('info:welcome'),
-        info: data
-      }
-    };
-    return;
+    return Response.success(ctx, {
+      message: i18n._t('info:welcome'),
+      info: data
+    });
   }
 
-
   async status(ctx) {
-    ctx.type = 'application/json';
-    const data = {
+    return Response.success(ctx, {
       services: [
         {
           name: 'auth',
@@ -49,16 +41,11 @@ class MainController {
           status: 'ok'
         }
       ]
-    };
-    ctx.body = data;
-    return;
+    });
   }
 
-
   async spec(ctx) {
-    ctx.type = 'application/json';
-    ctx.body = swaggerSpec;
-    return;
+    return Response.success(ctx, swaggerSpec);
   }
 }
 
