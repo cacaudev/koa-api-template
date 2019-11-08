@@ -7,6 +7,7 @@
 
 'use strict';
 
+import chalk from 'chalk';
 import config from '../config';
 import App from './app';
 import Logger from './loaders/logger';
@@ -18,14 +19,25 @@ app.on('error', err => {
 });
 
 const server = app.listen(config.port, () => {
-  Logger.info(`
-    Koa Server listening on port: ${config.port},
-    in ${config.env} mode
-   `);
+  // Server Info
+  Logger.info(
+    chalk.greenBright(`\n-------\nServer:
+    mode: [${chalk.magentaBright(`${config.env}`)}]
+    url: ${chalk.blueBright(`http://localhost:${config.port}`)}
+    ${chalk.black.bgGreenBright('Koa API is ready!')}\n-------`
+    )
+  );
 });
 
 server.on('error', err => {
-  Logger.error(err);
+  Logger.error(
+    chalk.redBright(`\n-------
+    Error starting Koa Server:
+    Code: [${chalk.magentaBright(`${err.code}`)}]
+    Port: [${chalk.magentaBright(`${err.port}`)}]
+    Server shutting down.}\n-------
+    `)
+  );
 });
 
 module.exports = server;

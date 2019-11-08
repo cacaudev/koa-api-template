@@ -36,4 +36,4 @@ Logger.stream = {
   },
 };
 
-export default Logger;
+module.exports = Logger;

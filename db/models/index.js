@@ -3,24 +3,22 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const chalk = require('chalk');
+const Logger = require('../../src/loaders/logger');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../config/db.config.js')[env];
 const db = {};
 
-const loggingEnv = config.logging;
-const operatorsAliasesEnv = config.operatorsAliases;
-const dialectOptionsEnv = config.dialectOptions;
-
 let sequelize;
 
 if (config.url) {
+  // Establish connection
   sequelize = new Sequelize(
     config.url,
     {
-      logging: loggingEnv,
-      operatorsAliases: operatorsAliasesEnv,
-      dialectOptions: dialectOptionsEnv
+      logging: config.logging,
+      dialectOptions: config.dialectOptions
     }
   );
 
@@ -28,17 +26,28 @@ if (config.url) {
   sequelize
     .authenticate()
     .then(() => {
-      console.log(`
-        Connection to ${env} database has been established successfully.
-      `);
+      Logger.info(
+        chalk.greenBright(`\n-------\nDatabase:
+        mode: [${chalk.magentaBright(`${env}`)}]
+        ${chalk.black.bgGreenBright('Connection established successfully.')}\n-------`
+        )
+      );
     })
     .catch(err => {
-      console.error(`Unable to connect to the ${env} database:`, err);
+      Logger.error(
+        chalk.greenBright(`\n-------\nDatabase:
+        mode: [${chalk.bgRed(`${env}`)}]
+        error: ${chalk.black.bgRedBright(`Unable to connect to database: ${err}`)}
+        -------`
+        )
+      );
     });
 } else
-  console.error(`
-    Database url do not exist on db config file for the requested env=${env} mode.
-  `);
+  Logger.error(`
+    ${chalk.black.bgRedBright(
+    'Database url do not exist on db config file for the requested env mode.'
+  )}
+`);
 
 fs
   .readdirSync(__dirname)

@@ -1,7 +1,7 @@
 'use strict';
 
 import bodyParser from 'koa-bodyparser';
-
+import Logger from '../loaders/logger';
 /**
  * Return middleware that parses HTTP request body.
  * @module body_parser
@@ -15,7 +15,7 @@ export function body_parser(options = {}) {
   return bodyParser({
     ...options,
     onerror: () => {
-      console.log('Error: Invalid format is detected in the request body');
+      Logger.error('Error: Invalid format is detected in the request body');
     }
   });
 }
