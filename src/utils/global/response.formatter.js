@@ -5,7 +5,7 @@
 */
 'use strict';
 
-const format_response = (ctx, status, content) => {
+const format_response = (ctx, status, content = null) => {
   const request_success = status < 400 ?
     'true' : 'false';
 

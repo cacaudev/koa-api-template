@@ -35,6 +35,10 @@ class Response {
     format_response(ctx, this.STATUS_CODES.CREATED, content);
   }
 
+  static noContent(ctx) {
+    format_response(ctx, this.STATUS_CODES.NO_CONTENT);
+  }
+
   /**
    *
    * @param {*} ctx

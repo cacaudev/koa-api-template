@@ -10,6 +10,7 @@
 import Router from 'koa-router';
 import auth from './auth.router';
 import main from './main.router';
+import user from './user.router';
 import config from '../../config';
 
 let app_router = new Router({
@@ -23,6 +24,7 @@ let app_router = new Router({
 */
 main(Router, app_router);
 auth(Router, app_router);
+user(Router, app_router);
 
 app_router.all('/*', async (ctx) => {
   ctx.body = {
