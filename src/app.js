@@ -72,6 +72,9 @@ class App extends Koa {
       app_router.routes(),
       app_router.allowedMethods()
     );
+
+    console.log('routes: ');
+    console.log(app_router.stack.map(i => i.path));
   }
 }
 

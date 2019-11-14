@@ -7,7 +7,10 @@
 
 'use strict';
 
-import { User_Schema_Create_Validator } from '../validators';
+import {
+  User_Schema_Create_Validator,
+  Authorization_Header_Validator
+} from '../validators';
 import { AuthController } from '../controllers';
 
 /**
@@ -23,6 +26,11 @@ export default (Router, app_router) => {
   auth_router.post('/signup',
     User_Schema_Create_Validator,
     authController.SignUp
+  );
+
+  auth_router.get('/token',
+    Authorization_Header_Validator,
+    authController.SignIn
   );
 
   app_router.use(auth_router.routes());
