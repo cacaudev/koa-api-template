@@ -8,6 +8,7 @@
 'use strict';
 
 import { UserController } from '../controllers';
+import { User_Id_Validator } from '../validators';
 
 /**
  * @param {Router} Router - Koa Router instance
@@ -19,15 +20,8 @@ export default (Router, app_router) => {
 
   const userController = new UserController();
 
-  user_router.get(
-    '/:userId',
-    userController.read
-  );
-
-  user_router.delete(
-    '/:userId',
-    userController.delete
-  );
+  user_router.get('/:userId', User_Id_Validator, userController.read);
+  user_router.delete('/:userId', User_Id_Validator, userController.delete);
 
   app_router.use(user_router.routes());
 };
