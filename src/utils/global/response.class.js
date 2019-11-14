@@ -27,18 +27,30 @@ class Response {
   /**
    * Return Response with code 201.
    * @param {*} ctx
-   * @param {*} content
+   * @param {object, string} content
    * @example
-   * return Response.success(ctx, { user: user_data });
+   * Response.success(ctx, { user: user_data });
    */
   static created(ctx, content) {
     format_response(ctx, this.STATUS_CODES.CREATED, content);
   }
 
+  /**
+   * Return Response with code 204.
+   * @param {*} ctx
+   * @example
+   * Response.noContent(ctx);
+   */
   static noContent(ctx) {
     format_response(ctx, this.STATUS_CODES.NO_CONTENT);
   }
 
+  /**
+   * Return Response with code 404.
+   * @param {*} ctx
+   * @example
+   * Response.notFound(ctx, 'User');
+   */
   static notFound(ctx, resource_name) {
     format_response(ctx, this.STATUS_CODES.NOT_FOUND, {
       error: {
@@ -52,11 +64,11 @@ class Response {
   /**
    *
    * @param {*} ctx
-   * @param {*} content
+   * @param {object, string} content
    * @returns
    *
    * @example
-   * return Response.error(ctx, 'NOT_FOUND', 'User not found');
+   * Response.error(ctx, 'BAD_REQUEST', 'User params are invalid');
    */
   static error(ctx, event, content) {
     let status = this.STATUS_CODES[event] || ctx.status;

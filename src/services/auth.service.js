@@ -21,8 +21,9 @@ class AuthService {
    * @desc Create a new user
    * @method
    * @param {Object} user_input
-   * @param {Object} user_input.name - User name
-   * @param {Object} user_input.surname - User surname
+   * @param {String} user_input.name - User name
+   * @param {String} user_input.surname - User surname
+   * @param {Number} user_input.age - User age
    * @returns {Record} User Instance
    *
    * @example
