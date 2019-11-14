@@ -36,13 +36,16 @@ class UserService {
   }
 
   async UpdateById(id, user_input) {
-    return await this.userModel.update({
+    return await this.userModel.update(
       user_input,
-      where: { id },
-    });
+      {
+        returning: true, // Return the user record updated
+        where: { id }
+      }
+    );
   }
 
-  async DeleteById(id, user_input) {
+  async DeleteById(id) {
     return await this.userModel.destroy({
       where: { id }
     });
