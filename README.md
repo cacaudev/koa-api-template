@@ -35,7 +35,7 @@ So, the structure will be like this:
 - [x] i18n Support (i18next)
 - [x] Response Formatter 'Layer'
 - [x] Errors Emitter 'Layer'
-- [] JWT Authentication Layer
+- [ ] JWT Authentication Layer
 - [ ] Dependency Injection (Awilix)
 - [ ] JSDoc with Swagger Documentation
 - [ ] Unit tests (Mocha or Jest)
