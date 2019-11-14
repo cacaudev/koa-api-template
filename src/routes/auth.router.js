@@ -20,11 +20,7 @@ export default (Router, app_router) => {
 
   const authController = new AuthController();
 
-  auth_router.post(
-    '/signup',
-    SignUp_Validator,
-    authController.SignUp
-  );
+  auth_router.post('/signup', SignUp_Validator, authController.SignUp);
 
   app_router.use(auth_router.routes());
 };

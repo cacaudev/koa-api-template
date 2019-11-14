@@ -1,6 +1,6 @@
 /*
- * Name: user.js
- * Description: Validator for user resource endpoints.
+ * Name: auth.validator.js
+ * Description: Validator for auth resource endpoints.
  * Author: Cacaudev
  * Date: 08/10/2019
 */
