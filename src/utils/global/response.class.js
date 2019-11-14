@@ -39,6 +39,16 @@ class Response {
     format_response(ctx, this.STATUS_CODES.NO_CONTENT);
   }
 
+  static notFound(ctx, resource_name) {
+    format_response(ctx, this.STATUS_CODES.NOT_FOUND, {
+      error: {
+        name: 'NOT_FOUND',
+        resource: resource_name,
+        message: 'Selected resource was not found'
+      }
+    });
+  }
+
   /**
    *
    * @param {*} ctx

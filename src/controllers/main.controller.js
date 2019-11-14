@@ -4,7 +4,7 @@ import { LocaleService } from '../services';
 import swaggerSpec from '../../config/swagger.config';
 import appInfo from '../../package.json';
 import os from 'os';
-import Response from '../utils/global/response';
+import Response from '../utils/global/response.class';
 
 class MainController {
   async getApiInfo(ctx) {
@@ -31,16 +31,13 @@ class MainController {
 
   async status(ctx) {
     return Response.success(ctx, {
-      services: [
-        {
-          name: 'auth',
-          status: 'ok'
-        },
-        {
-          name: 'dashboard',
-          status: 'ok'
-        }
-      ]
+      services: [{
+        name: 'auth',
+        status: 'ok'
+      }, {
+        name: 'dashboard',
+        status: 'ok'
+      }]
     });
   }
 

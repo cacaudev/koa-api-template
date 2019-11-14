@@ -1,5 +1,5 @@
 'use static';
-import Response from '../utils/global/response';
+import Response from '../utils/global/response.class';
 
 export async function Error_Handler(ctx, next) {
 

@@ -6,7 +6,7 @@
 'use strict';
 
 import { AuthService } from '../services';
-import Response from '../utils/global/response';
+import Response from '../utils/global/response.class';
 
 class AuthController {
   async SignUp(ctx) {
