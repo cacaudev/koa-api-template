@@ -61,6 +61,15 @@ class Response {
     });
   }
 
+  static unauthorized(ctx) {
+    format_response(ctx, this.STATUS_CODES.UNAUTHORIZED, {
+      error: {
+        name: 'UNAUTHORIZED',
+        message: 'Username or password is incorrect'
+      }
+    });
+  }
+
   /**
    *
    * @param {*} ctx

@@ -32,15 +32,16 @@ class AuthController {
     return await AuthInstance
       .Authenticate({ username, password })
       .then((result) => {
+        console.log('result ', result);
         if (!result)
           Response.unauthorized(ctx);
       })
-      .generateToken()
-      .then((result) => Response.success(ctx, {
+      //.generateToken()
+      /*.then((result) => Response.success(ctx, {
         access_token: result,
         token_type: 'Bearer',
         expires_in: '7 days'
-      }))
+      }))*/
       .catch((err) => Response.error(ctx,
         'BAD_REQUEST',
         `Error trying to create user: ${err}`

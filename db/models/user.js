@@ -5,6 +5,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       primaryKey: true // Disable sequelize 'id' default column
     },
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
     name: DataTypes.STRING,
     surname: DataTypes.STRING,
     age: DataTypes.INTEGER

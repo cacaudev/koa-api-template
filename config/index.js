@@ -28,6 +28,9 @@ const app_config = {
     port: process.env.PORT || 3000,
     api: {
       prefix: '/v1'
+    },
+    auth: {
+      bycrypt_cost: process.env.BCRYPT_COST
     }
   },
   development: {

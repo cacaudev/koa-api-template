@@ -19,6 +19,17 @@ export const User_Id_Validator = validator({
 
 export const User_Schema_Create_Validator = validator({
   body: Joi.object().keys({
+    username: Joi.string()
+      .min(4)
+      .max(32)
+      .required(),
+    password: Joi.string()
+      .min(4)
+      .max(32)
+      .required(),
+    confirm_password: Joi.string()
+      .valid(Joi.ref('password'))
+      .required(),
     name: Joi.string()
       .min(4)
       .max(32)

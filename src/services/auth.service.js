@@ -1,9 +1,10 @@
 'use strict';
 
-import { User } from '../../db/models';
-
-import randtoken from 'rand-token';
 import bcrypt from 'bcryptjs';
+import randtoken from 'rand-token';
+
+import { User } from '../../db/models';
+import { encryptPassword } from '../utils';
 
 class AuthService {
   /**
@@ -34,15 +35,35 @@ class AuthService {
    */
   async Signup(user_input) {
     const id = randtoken.generator().generate(36);
+    const encrypted_password = await encryptPassword(user_input.password);
+
+    if (encrypted_password.error)
+      return null;
+
+    user_input.password = encrypted_password;
     return await this.userModel.create({ id, ...user_input });
   }
 
+  /**
+   *
+   * @param {string} username
+   * @param {string} password
+   */
   async Authenticate({ username, password }) {
-    return await this.userModel.findOne({ id, ...user_input });
+    const userFound = await this.userModel.findOne({
+      where: { username },
+      attributes: ['username', 'password'],
+      raw: true
+    });
+    if (userFound)
+      if (bcrypt.compareSync(password, userFound.password))
+        return true;
+
+    return false;
   }
 
   async GenerateToken(user_id) {
-
+    console.log('hello from token ');
   }
 }
 
