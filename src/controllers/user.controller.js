@@ -10,11 +10,13 @@ class UserController {
 
     return await userInstance
       .GetById(user_Id)
-      .then((result) => {
+      .then(async (result) => {
         if (!result)
           Response.notFound(ctx, 'User');
         else
-          Response.success(ctx, { user: result });
+          Response.success(ctx, {
+            user: await userInstance.Serialize(result)
+          });
       })
       .catch((err) => Response.error(ctx,
         'BAD_REQUEST',
@@ -29,12 +31,12 @@ class UserController {
 
     return await userInstance
       .UpdateById(user_Id, user_data)
-      .then(([updatedRows, [updatedResources]]) => {
+      .then(async ([updatedRows, [updatedResources]]) => {
         if (updatedRows == 0)
           Response.notFound(ctx, 'User');
         else
           Response.success(ctx, {
-            user: updatedResources
+            user: await userInstance.Serialize(updatedResources)
           });
       })
       .catch((err) => Response.error(ctx,
