@@ -2,9 +2,11 @@
 
 import bcrypt from 'bcryptjs';
 import randtoken from 'rand-token';
+import jwt from 'jsonwebtoken';
 
 import { User } from '../../db/models';
 import { encryptPassword } from '../utils';
+import config from '../../config';
 
 class AuthService {
   /**
@@ -53,18 +55,30 @@ class AuthService {
   async Authenticate({ username, password }) {
     const userFound = await this.userModel.findOne({
       where: { username },
-      attributes: ['username', 'password'],
+      attributes: ['id', 'username', 'password'],
       raw: true
     });
     if (userFound)
       if (bcrypt.compareSync(password, userFound.password))
-        return true;
+        return userFound.id;
 
-    return false;
+    throw new Error();
   }
 
   async GenerateToken(user_id) {
-    console.log('hello from token ');
+    let token = {};
+    try {
+      token = jwt.sign({
+        userId: user_id,
+        type: 'default'
+      }, config.auth.jwt_secret, {
+        algorithm: 'HS256',
+        expiresIn: '7d' // 7 days
+      });
+    } catch (error) {
+      throw new Error();
+    }
+    return token;
   }
 }
 

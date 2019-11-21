@@ -26,26 +26,19 @@ class AuthController {
   async SignIn(ctx) {
     let authHeader = ctx.request.headers['authorization'];
     const { username, password } = await BasicAuthParser(authHeader);
-    console.log('{ username, password } ', { username, password });
 
     const AuthInstance = new AuthService();
     return await AuthInstance
       .Authenticate({ username, password })
-      .then((result) => {
-        console.log('result ', result);
-        if (!result)
-          Response.unauthorized(ctx);
+      .then(async (user_id) => {
+        const token = await AuthInstance.GenerateToken(user_id);
+        return Response.success(ctx, {
+          access_token: token,
+          token_type: 'Bearer',
+          expires_in: '7 days'
+        });
       })
-      //.generateToken()
-      /*.then((result) => Response.success(ctx, {
-        access_token: result,
-        token_type: 'Bearer',
-        expires_in: '7 days'
-      }))*/
-      .catch((err) => Response.error(ctx,
-        'BAD_REQUEST',
-        `Error trying to create user: ${err}`
-      ));
+      .catch(() => Response.unauthorized(ctx));
   }
 }
 

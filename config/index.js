@@ -7,8 +7,12 @@
 
 'use strict';
 
+import path from 'path';
 import dotenv from 'dotenv';
-dotenv.config();
+
+dotenv.config({
+  path: path.resolve(__dirname + '/.env')
+});
 
 /**
  * App node environment.
@@ -30,7 +34,8 @@ const app_config = {
       prefix: '/v1'
     },
     auth: {
-      bycrypt_cost: process.env.BCRYPT_COST
+      bcrypt_cost: process.env.BCRYPT_COST,
+      jwt_secret: process.env.JWT_SECRET
     },
     date_format_default: 'YYYY/MM/DD HH:MM:SS'
   },

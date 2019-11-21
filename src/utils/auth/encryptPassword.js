@@ -13,7 +13,7 @@ export async function encryptPassword(password) {
   try {
     new_password = bcrypt.hashSync(
       password,
-      Number(config.auth.bycrypt_cost)
+      Number(config.auth.bcrypt_cost)
     );
   } catch (error) {
     return { error: error };
