@@ -35,7 +35,8 @@ So, the structure will be like this:
 - [x] i18n Support (i18next)
 - [x] Response Formatter 'Layer'
 - [x] Errors Emitter 'Layer'
-- [ ] Bycrpt Authorization and Protection
+- [x] Timezone configuration
+- [ ] Bcrypt Authorization and Protection
 - [ ] JWT Authentication Layer
 - [ ] Dependency Injection (Awilix)
 - [ ] JSDoc with Swagger Documentation
