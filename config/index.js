@@ -31,7 +31,8 @@ const app_config = {
     },
     auth: {
       bycrypt_cost: process.env.BCRYPT_COST
-    }
+    },
+    date_format_default: 'YYYY/MM/DD HH:MM:SS'
   },
   development: {
     port: process.env.PORT || 8080,

@@ -11,8 +11,8 @@ import validator, { Joi } from 'koa-context-validator';
 
 export const User_Id_Validator = validator({
   params: Joi.object().keys({
-    userId: Joi.number()
-      .positive()
+    userId: Joi.string()
+      .length(36)
       .required()
   })
 });
@@ -53,6 +53,9 @@ export const User_Schema_Update_Validator = validator({
       .min(4)
       .max(32),
     age: Joi.number()
-      .positive()
+      .positive(),
+    timezone: Joi.string()
+      .min(4)
+      .max(36)
   })
 });
