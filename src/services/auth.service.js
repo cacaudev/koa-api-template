@@ -37,7 +37,7 @@ class AuthService {
    */
   async Signup(user_input) {
     const id = randtoken.generator().generate(36);
-    user_input.timezone = 'America/Los_Angeles';
+    user_input.timezone = 'America/Sao_Paulo';
     const encrypted_password = await encryptPassword(user_input.password);
 
     if (encrypted_password.error)
