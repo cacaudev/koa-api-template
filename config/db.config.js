@@ -17,7 +17,6 @@ module.exports = {
   'development': {
     'url': process.env.DEVELOPMENT_DATABASE_URL,
     'logging': false,
-    'operatorsAliases': false,
     'dialect': 'postgres',
     'dialectOptions': {
       'ssl': false
@@ -26,7 +25,6 @@ module.exports = {
   'test': {
     'url': process.env.TEST_DATABASE_URL,
     'logging': false,
-    'operatorsAliases': false,
     'dialect': 'postgres',
     'dialectOptions': {
       'ssl': true
@@ -35,7 +33,6 @@ module.exports = {
   'stage': {
     'url': process.env.STAGE_DATABASE_URL,
     'logging': false,
-    'operatorsAliases': false,
     'dialect': 'postgres',
     'dialectOptions': {
       'ssl': true
@@ -44,7 +41,6 @@ module.exports = {
   'production': {
     'url': process.env.PRODUCTION_DATABASE_URL,
     'logging': false,
-    'operatorsAliases': false,
     'dialect': 'postgres',
     'dialectOptions': {
       'ssl': true
