@@ -26,12 +26,14 @@ if (config.url) {
   sequelize
     .authenticate()
     .then(() => {
-      Logger.info(
-        chalk.greenBright(`\n-------\nDatabase:
-        mode: [${chalk.magentaBright(`${env}`)}]
-        ${chalk.black.bgGreenBright('Connection established successfully.')}\n-------`
-        )
-      );
+      if (env == 'development' || env == 'stage') {
+        Logger.info(
+          chalk.greenBright(`\n-------\nDatabase:
+          mode: [${chalk.magentaBright(`${env}`)}]
+          ${chalk.black.bgGreenBright('Connection established successfully.')}\n-------`
+          )
+        );
+      }
     })
     .catch(err => {
       Logger.error(

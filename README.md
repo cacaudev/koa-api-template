@@ -40,7 +40,7 @@ So, the structure will be like this:
 - [ ] JWT Authentication Layer
 - [ ] Dependency Injection (Awilix)
 - [ ] JSDoc with Swagger Documentation
-- [ ] Unit tests (Mocha or Jest)
+- [ ] Unit tests (Jest and SuperTest)
 - [ ] Status Monitor
 - [ ] Deploy server on Heroku
 - [ ] Continuous integration with TravisCI

@@ -12,11 +12,11 @@
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "npx eslint src/**/*.js",
     "doc": "npx jsdoc -c ./conf.json",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "create:db": "npx sequelize db:create",
     "migrate:db": "npx sequelize db:migrate",
     "seed:db": "npx sequelize db:seed:all",
-    "reset:db": "npm run create:db && npm run migrate:db"
+    "reset:db": "npm run create:db && npm run migrate:db",
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "repository": {
     "type": "git",
@@ -62,10 +62,13 @@
     "@babel/node": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
+    "jest": "^24.9.0",
     "jsdoc": "^3.6.3",
     "nodemon": "^1.19.2",
     "sequelize-cli": "^5.5.1",
+    "supertest": "^4.0.2",
     "toast-jsdoc": "^1.0.2"
   }
 }
