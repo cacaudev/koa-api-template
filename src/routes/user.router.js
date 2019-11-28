@@ -36,6 +36,9 @@ export default (Router, app_router) => {
     User_Id_Validator,
     userController.delete
   );
+  user_router.get('s',
+    userController.list
+  );
 
   app_router.use(user_router.routes());
 };

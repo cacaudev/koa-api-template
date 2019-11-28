@@ -62,6 +62,23 @@ class UserController {
         `Error trying to delete user: ${err}`
       ));
   }
+
+  async list(ctx) {
+    const userInstance = new UserService();
+
+    return await userInstance
+      .List()
+      .then(async (users) => {
+        users.map((user) => userInstance.Serialize(user));
+        Response.success(ctx, {
+          users: users
+        });
+      })
+      .catch((err) => Response.error(ctx,
+        'BAD_REQUEST',
+        `Error trying to list users: ${err}`
+      ));
+  }
 }
 
 module.exports = { UserController };

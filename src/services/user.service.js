@@ -44,6 +44,15 @@ class UserService {
     });
   }
 
+  async List() {
+    return await this.userModel.findAll({
+      attributes: {
+        exclude: ['password']
+      },
+      raw: true
+    });
+  }
+
   async UpdateById(id, user_input) {
     return await this.userModel.update(
       user_input,
@@ -62,7 +71,8 @@ class UserService {
   }
 
   async Serialize(user_input) {
-    user_input.password = undefined;
+    if (user_input.password)
+      user_input.password = undefined;
 
     let dates = _.pick(user_input, this.dateFields);
     for (var key in dates)
