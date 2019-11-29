@@ -38,8 +38,12 @@ class UserService {
     return await this.userModel.findByPk(id, { raw: true });
   }
 
-  async List() {
-    return await this.userModel.findAll({ raw: true });
+  async List({ offset = 0, limit = 1000 }) {
+    return await this.userModel.findAndCountAll({
+      offset,
+      limit,
+      raw: true
+    });
   }
 
   async UpdateById(id, user_input) {
