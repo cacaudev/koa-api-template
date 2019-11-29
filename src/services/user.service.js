@@ -35,22 +35,11 @@ class UserService {
    * let user_record = await userServiceInstance.Read(user_data);
    */
   async GetById(id) {
-    return await this.userModel.findOne({
-      where: { id },
-      attributes: {
-        exclude: ['password']
-      },
-      raw: true
-    });
+    return await this.userModel.findByPk(id, { raw: true });
   }
 
   async List() {
-    return await this.userModel.findAll({
-      attributes: {
-        exclude: ['password']
-      },
-      raw: true
-    });
+    return await this.userModel.findAll({ raw: true });
   }
 
   async UpdateById(id, user_input) {
@@ -65,9 +54,7 @@ class UserService {
   }
 
   async DeleteById(id) {
-    return await this.userModel.destroy({
-      where: { id }
-    });
+    return await this.userModel.destroy({ where: { id } });
   }
 
   async Serialize(user_input) {
