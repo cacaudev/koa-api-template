@@ -10,7 +10,8 @@
 import { UserController } from '../controllers';
 import {
   User_Id_Validator,
-  User_Schema_Update_Validator
+  User_Schema_Update_Validator,
+  Paginate_Params
 } from '../validators';
 
 /**
@@ -37,6 +38,7 @@ export default (Router, app_router) => {
     userController.delete
   );
   user_router.get('s',
+    Paginate_Params,
     userController.list
   );
 
