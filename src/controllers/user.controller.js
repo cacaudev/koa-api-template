@@ -75,6 +75,9 @@ class UserController {
     return await userInstance
       .List(query)
       .then(async (users) => {
+        if (users.count == 0)
+          return Response.noContent(ctx, {});
+
         users['rows'].map((user) => userInstance.Serialize(user));
 
         let result = { users: users.rows };
