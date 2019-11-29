@@ -38,6 +38,7 @@ So, the structure will be like this:
 - [x] Timezone configuration
 - [ ] Bcrypt Authorization and Protection
 - [ ] JWT Authentication Layer
+- [x] Pagination support
 - [ ] Dependency Injection (Awilix)
 - [ ] JSDoc with Swagger Documentation
 - [ ] Unit tests (Jest and SuperTest)
