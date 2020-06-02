@@ -1,12 +1,9 @@
 'use strict';
 
 import bcrypt from 'bcryptjs';
-import randtoken from 'rand-token';
 import jwt from 'jsonwebtoken';
-
-import { User } from '../../db/models';
-import { encryptPassword } from '../utils';
-import config from '../../config';
+import { User } from '../../../db/models';
+import config from '../../../config';
 
 class AuthService {
   /**
@@ -21,30 +18,6 @@ class AuthService {
 
   constructor() {
     this.userModel = User;
-  }
-
-  /**
-   * @desc Create a new user
-   * @method
-   * @param {Object} user_input
-   * @param {String} user_input.name - User name
-   * @param {String} user_input.surname - User surname
-   * @param {Number} user_input.age - User age
-   * @returns {Record} User Instance
-   *
-   * @example
-   * let user_record = await authServiceInstance.Signup(user_data);
-   */
-  async Signup(user_input) {
-    const id = randtoken.generator().generate(36);
-    user_input.timezone = 'America/Sao_Paulo';
-    const encrypted_password = await encryptPassword(user_input.password);
-
-    if (encrypted_password.error)
-      return null;
-
-    user_input.password = encrypted_password;
-    return await this.userModel.create({ id, ...user_input });
   }
 
   /**

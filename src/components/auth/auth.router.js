@@ -7,11 +7,8 @@
 
 'use strict';
 
-import {
-  User_Schema_Create_Validator,
-  Authorization_Header_Validator
-} from '../validators';
-import { AuthController } from '../controllers';
+import { Authorization_Header_Validator } from '../../global/validators';
+import { AuthController } from './auth.controller';
 
 /**
  * @param {Router} Router - Koa Router instance
@@ -22,11 +19,6 @@ export default (Router, app_router) => {
   auth_router.prefix('/auth');
 
   const authController = new AuthController();
-
-  auth_router.post('/signup',
-    User_Schema_Create_Validator,
-    authController.SignUp
-  );
 
   auth_router.get('/token',
     Authorization_Header_Validator,

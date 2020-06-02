@@ -7,12 +7,13 @@
 
 'use strict';
 
-import { UserController } from '../controllers';
+import { UserController } from './user.controller';
+import { Paginate_Params } from '../../global/validators';
 import {
-  User_Id_Validator,
-  User_Schema_Update_Validator,
-  Paginate_Params
-} from '../validators';
+  Id_Validator,
+  Update_Validator,
+  Create_Validator
+} from './user.validator';
 
 /**
  * @param {Router} Router - Koa Router instance
@@ -24,17 +25,22 @@ export default (Router, app_router) => {
 
   const userController = new UserController();
 
+  user_router.post('/',
+    Create_Validator,
+    userController.create
+  );
+
   user_router.get('/:userId',
-    User_Id_Validator,
+    Id_Validator,
     userController.read
   );
   user_router.patch('/:userId',
-    User_Id_Validator,
-    User_Schema_Update_Validator,
+    Id_Validator,
+    Update_Validator,
     userController.update
   );
   user_router.delete('/:userId',
-    User_Id_Validator,
+    Id_Validator,
     userController.delete
   );
   user_router.get('s',

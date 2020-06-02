@@ -9,7 +9,7 @@
 const i18next = require('i18next');
 
 // Translations folder
-const resources = require('../src/locales');
+const resources = require('./locales');
 
 var options = {
   // language codes to lookup

@@ -14,7 +14,7 @@ import helmet from 'koa-helmet';
 import {
   Body_Parser,
   Error_Handler
-} from './middlewares';
+} from './global/middlewares';
 import app_router from './routes';
 import Logger from './loaders/logger';
 

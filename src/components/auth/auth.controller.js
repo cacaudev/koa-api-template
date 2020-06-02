@@ -5,32 +5,11 @@
 */
 'use strict';
 
-import {
-  AuthService,
-  UserService
-} from '../services';
-import { BasicAuthParser } from '../utils';
-import Response from '../utils/global/response.class';
+import { AuthService } from './auth.service';
+import { BasicAuthParser } from './utils';
+import Response from '../../global/utils/response.class';
 
 class AuthController {
-  async SignUp(ctx) {
-    const user_data = ctx.request.body;
-    const userInstance = new UserService();
-    const AuthInstance = new AuthService();
-
-    return await AuthInstance
-      .Signup(user_data)
-      .then(async (result) => {
-        Response.created(ctx, {
-          user: await userInstance.Serialize(result)
-        });
-      })
-      .catch((err) => Response.error(ctx,
-        'BAD_REQUEST',
-        `Error trying to create user: ${err}`
-      ));
-  }
-
   async SignIn(ctx) {
     let authHeader = ctx.request.headers['authorization'];
     const { username, password } = await BasicAuthParser(authHeader);

@@ -9,7 +9,7 @@
 
 import validator, { Joi } from 'koa-context-validator';
 
-export const User_Id_Validator = validator({
+export const Id_Validator = validator({
   params: Joi.object().keys({
     userId: Joi.string()
       .length(36)
@@ -17,7 +17,7 @@ export const User_Id_Validator = validator({
   })
 });
 
-export const User_Schema_Create_Validator = validator({
+export const Create_Validator = validator({
   body: Joi.object().keys({
     username: Joi.string()
       .min(4)
@@ -44,7 +44,7 @@ export const User_Schema_Create_Validator = validator({
   })
 });
 
-export const User_Schema_Update_Validator = validator({
+export const Update_Validator = validator({
   body: Joi.object().keys({
     name: Joi.string()
       .min(4)

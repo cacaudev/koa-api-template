@@ -8,10 +8,10 @@
 'use strict';
 
 import Router from 'koa-router';
-import auth from './auth.router';
-import main from './main.router';
-import user from './user.router';
-import config from '../../config';
+import auth from './components/auth/auth.router';
+import main from './components/main/main.router';
+import user from './components/users/user.router';
+import config from '../config';
 
 let app_router = new Router({
   prefix: config.api.prefix

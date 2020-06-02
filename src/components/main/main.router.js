@@ -7,7 +7,7 @@
 
 'use strict';
 
-import { MainController } from '../controllers';
+import { MainController } from './main.controller';
 /**
  * @param {Router} Router - Koa Router instance
  * @param {Router} app_router - app router from app

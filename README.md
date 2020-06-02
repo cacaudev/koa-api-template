@@ -8,7 +8,7 @@ Use principle of separation of concerns to move the business logic away from the
 
 So, the structure will be like this:
 
-![alt text](./API_Layers_Structure.png)
+![alt text](./assets/API_Layers_Structure.png)
 
 ### Prerequisites
 - NodeJS > 10.0

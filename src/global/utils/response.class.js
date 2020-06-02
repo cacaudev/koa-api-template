@@ -6,7 +6,7 @@
 'use strict';
 
 import STATUS_CODES from '../../static/status_codes';
-import { format_response } from './response.formatter';
+import { format_response } from './response_formatter';
 
 class Response {
   static get STATUS_CODES() {

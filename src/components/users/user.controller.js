@@ -1,11 +1,28 @@
 'use strict';
 
 import _ from 'lodash';
-import { UserService } from '../services';
-import { Paginate } from '../utils';
-import Response from '../utils/global/response.class';
+import { UserService } from './user.service';
+import { Paginate } from '../../global/utils';
+import Response from '../../global/utils/response.class';
 
 class UserController {
+  async create(ctx) {
+    const user_data = ctx.request.body;
+    const userInstance = new UserService();
+
+    return await userInstance
+      .create(user_data)
+      .then(async (result) => {
+        Response.created(ctx, {
+          user: await userInstance.Serialize(result)
+        });
+      })
+      .catch((err) => Response.error(ctx,
+        'BAD_REQUEST',
+        `Error trying to create user: ${err}`
+      ));
+  }
+
   async read(ctx) {
     const user_Id = ctx.params.userId;
     const userInstance = new UserService();

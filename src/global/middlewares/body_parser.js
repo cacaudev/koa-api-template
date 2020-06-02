@@ -6,7 +6,7 @@
 'use strict';
 
 import bodyParser from 'koa-bodyparser';
-import Logger from '../loaders/logger';
+import Logger from '../../loaders/logger';
 /**
  * Return middleware that parses HTTP request body.
  * @module body_parser
