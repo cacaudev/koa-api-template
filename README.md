@@ -3,12 +3,43 @@ REST Api template to be used on personal projects and for learning purposes.
 
 🚀 UNDER CONSTRUCTION 🚀
 
-## Initial Scope
+## Guide
 Use principle of separation of concerns to move the business logic away from the API routes.
 
 So, the structure will be like this:
 
 ![alt text](./API_Layers_Structure.png)
+
+### Prerequisites
+- NodeJS > 10.0
+- PostgreSQL > 10.13
+- (Optional) PgAdmin > 4.0 - Only for database management and verify data
+
+### Installation
+
+OBS: Add .env file on the config folder using the keys from the example on the same paste
+before running the commands to create and populate database.
+
+- Install Dependencies
+```
+$ npm install
+```
+- Create local database
+```
+$ npm run create:db
+```
+- Add user table from the migration folder
+```
+$ npm run migrate:db
+```
+- Run server locally
+```
+$ npm run dev
+```
+- Run tests
+```
+$ npm run test
+```
 
 ## First things first
 
@@ -32,13 +63,13 @@ So, the structure will be like this:
 - [x] API Validation layer (Joi)
 - [x] Service Layer examples
 - [x] Logging 'Layer' (Koa-morgan, Winston)
-- [x] i18n Support (i18next)
+- [x] i18n Support (i18next) for Content Translation
 - [x] Response Formatter 'Layer'
 - [x] Errors Emitter 'Layer'
 - [x] Timezone configuration
+- [x] Pagination support
 - [ ] Bcrypt Authorization and Protection
 - [ ] JWT Authentication Layer
-- [x] Pagination support
 - [ ] Dependency Injection (Awilix)
 - [ ] JSDoc with Swagger Documentation
 - [ ] Unit tests (Jest and SuperTest)
