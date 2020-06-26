@@ -5,9 +5,9 @@
  * Date: 01/11/2019
 */
 
-'use strict';
+"use strict";
 
-const i18next = require('./config');
+const i18next = require("./config");
 
 class LocaleService {
   /**
@@ -16,9 +16,9 @@ class LocaleService {
    * @param i18nProvider The i18n provider
    * @param {string} locale Language to startup the service instance. Default: en
    * @example
-   * let i18nService = new LocaleService('en');
+   * let i18nService = new LocaleService("en");
    */
-  constructor(locale = 'en') {
+  constructor(locale = "en") {
     this.i18nProvider = i18next;
     this.setLocale(locale);
   }
@@ -45,7 +45,7 @@ class LocaleService {
    * @method
    * @param locale The locale to set. Must be from the list of available locales.
    * @example
-   * LocaleService.setLocale('en');
+   * LocaleService.setLocale("en");
    */
   setLocale(locale) {
     this.i18nProvider.changeLanguage(locale);
@@ -57,7 +57,7 @@ class LocaleService {
    * @param {string} key_path Namespace:Key
    * @returns {string} Translated string
    * @example
-   * let new_string = await i18nService._t('info:welcome');
+   * let new_string = await i18nService._t("info:welcome");
    */
   _t(key_path) {
     return this.i18nProvider.t(key_path);

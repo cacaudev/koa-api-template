@@ -5,18 +5,21 @@
  * Date: 27/09/2019
 */
 
-'use strict';
+"use strict";
 
-import Koa from 'koa';
-import morgan from 'koa-morgan';
-import cors from '@koa/cors';
-import helmet from 'koa-helmet';
+import Koa from "koa";
+import morgan from "koa-morgan";
+import cors from "@koa/cors";
+import helmet from "koa-helmet";
+import compress from "koa-compress";
+
 import {
-  Body_Parser,
+  BodyParser,
   Error_Handler
-} from './global/middlewares';
-import app_router from './routes';
-import Logger from './loaders/logger';
+} from "./global/middlewares";
+
+import baseRouter from "./routes";
+import Logger from "./loaders/logger";
 
 class App extends Koa {
   /**
@@ -32,7 +35,7 @@ class App extends Koa {
   constructor(...params) {
     super(...params);
     this.proxy = true;
-    this.silent = this.env !== 'development';
+    this.silent = this.env !== "development";
     this.setMiddlewares();
   }
 
@@ -53,28 +56,32 @@ class App extends Koa {
     /**
      * Main app logger
      */
-    this.use(morgan('tiny', { stream: Logger.stream }));
+    this.use(morgan("tiny", { stream: Logger.stream }));
     /**
-     *
+    * Compress middleware for Koa
+    */
+    this.use(compress());
+    /**
+     * Error middleware
      */
     this.use(Error_Handler);
     /**
      * Parse request payload
      */
-    this.use(Body_Parser({
-      enableTypes: ['json'],
-      jsonLimit: '5mb'
+    this.use(BodyParser({
+      enableTypes: ["json"],
+      jsonLimit: "5mb"
     }));
     /**
      * Load API routes
      */
     this.use(
-      app_router.routes(),
-      app_router.allowedMethods()
+      baseRouter.routes(),
+      baseRouter.allowedMethods()
     );
 
-    console.log('routes: ');
-    console.log(app_router.stack.map(i => i.path));
+    console.log("routes: ");
+    console.log(baseRouter.stack.map(i => i.path));
   }
 }
 

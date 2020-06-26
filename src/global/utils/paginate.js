@@ -1,8 +1,10 @@
-/**
- * Author: cacaudev
- * Date: 29/11/19
+/*
+ * @Author: cacaudev
+ * @Date: 2020-06-26 16:23:23
+ * @Last Modified by: cacaudev
+ * @Last Modified time: 2020-06-26 16:32:40
  */
-'use strict';
+"use strict";
 
 /**
  * @des Generate pagination range
@@ -11,10 +13,12 @@
  * @returns {Object.offset} Offset -  Beginning of records range
  * @returns {Object.limit} Limit - Limit of records per page
  */
-export async function Paginate(pageNumber, pageSize) {
+const Paginate = async (pageNumber, pageSize) => {
   // Page index starts from 1 not 0
   if (pageNumber == 0) pageNumber = 1;
   const limit = pageSize;
   const offset = pageSize * (pageNumber - 1);
   return { offset, limit };
-}
+};
+
+export { Paginate };

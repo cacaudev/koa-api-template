@@ -3,10 +3,10 @@
  * Author: Cacaudev
  * Date: 01/11/2019
 */
-'use strict';
+"use strict";
 
-import bodyParser from 'koa-bodyparser';
-import Logger from '../../loaders/logger';
+import bodyParser from "koa-bodyparser";
+import Logger from "../../loaders/logger";
 /**
  * Return middleware that parses HTTP request body.
  * @module body_parser
@@ -16,11 +16,13 @@ import Logger from '../../loaders/logger';
  * @return {function} Convert request body to JSON type
  * @throws {InvalidMediaType} When the request format is invalid.
  */
-export function Body_Parser(options = {}) {
+const BodyParser = (options = {}) => {
   return bodyParser({
     ...options,
     onerror: () => {
-      Logger.error('Error: Invalid format is detected in the request body');
+      Logger.error("Error: Invalid format is detected in the request body");
     }
   });
-}
+};
+
+export { BodyParser };

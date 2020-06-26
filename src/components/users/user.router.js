@@ -5,48 +5,43 @@
  * Date: 08/11/2019
 */
 
-'use strict';
+"use strict";
 
-import { UserController } from './user.controller';
-import { Paginate_Params } from '../../global/validators';
+import Router from "koa-router";
+import { UserController } from "./user.controller";
+import { hasPaginationParams } from "../../global/middlewares";
 import {
-  Id_Validator,
-  Update_Validator,
-  Create_Validator
-} from './user.validator';
+  hasParams,
+  hasCredentials,
+  hasCreateBody,
+  hasUpdateBody
+} from "./user.middleware";
 
-/**
- * @param {Router} Router - Koa Router instance
- * @param {Router} app_router - app router from app
- */
-export default (Router, app_router) => {
-  const user_router = new Router;
-  user_router.prefix('/user');
+const UserRouter = new Router({ prefix: "/user" });
+const userController = new UserController();
 
-  const userController = new UserController();
-
-  user_router.post('/',
-    Create_Validator,
+UserRouter
+  .post("/",
+    hasCredentials,
+    hasCreateBody,
     userController.create
-  );
-
-  user_router.get('/:userId',
-    Id_Validator,
+  )
+  .get("/:userId",
+    hasParams,
     userController.read
-  );
-  user_router.patch('/:userId',
-    Id_Validator,
-    Update_Validator,
+  )
+  .patch("/:userId",
+    hasParams,
+    hasUpdateBody,
     userController.update
-  );
-  user_router.delete('/:userId',
-    Id_Validator,
+  )
+  .delete("/:userId",
+    hasParams,
     userController.delete
-  );
-  user_router.get('s',
-    Paginate_Params,
+  )
+  .get("s",
+    hasPaginationParams,
     userController.list
   );
 
-  app_router.use(user_router.routes());
-};
+export default UserRouter;

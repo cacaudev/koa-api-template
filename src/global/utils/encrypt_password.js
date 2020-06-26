@@ -5,10 +5,10 @@
   and extract user credentials.
 */
 
-import config from '../../../config';
-import bcrypt from 'bcryptjs';
+import config from "../../../config";
+import bcrypt from "bcryptjs";
 
-export async function encryptPassword(password) {
+const encryptPassword = async (password) => {
   let new_password;
   try {
     new_password = bcrypt.hashSync(
@@ -19,4 +19,6 @@ export async function encryptPassword(password) {
     return { error: error };
   }
   return new_password;
-}
+};
+
+export { encryptPassword };

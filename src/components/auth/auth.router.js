@@ -4,26 +4,21 @@
  * Author: Cacaudev
  * Date: 08/10/2019
 */
+"use strict";
 
-'use strict';
+import Router from "koa-router";
+import {
+  hasAuthorizationHeaders
+} from "../../global/middlewares";
+import { AuthController } from "./auth.controller";
 
-import { Authorization_Header_Validator } from '../../global/validators';
-import { AuthController } from './auth.controller';
+const AuthRouter = new Router({ prefix: "/auth" });
+const authController = new AuthController();
 
-/**
- * @param {Router} Router - Koa Router instance
- * @param {Router} app_router - app router from app
- */
-export default (Router, app_router) => {
-  const auth_router = new Router;
-  auth_router.prefix('/auth');
-
-  const authController = new AuthController();
-
-  auth_router.get('/token',
-    Authorization_Header_Validator,
+AuthRouter
+  .get("/token",
+    hasAuthorizationHeaders,
     authController.SignIn
   );
 
-  app_router.use(auth_router.routes());
-};
+export default AuthRouter;

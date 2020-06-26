@@ -3,10 +3,10 @@
  * Author: Cacaudev
  * Date: 08/11/2019
 */
-'use strict';
+"use strict";
 
-import STATUS_CODES from '../../static/status_codes';
-import { format_response } from './response_formatter';
+import STATUS_CODES from "../../static/status_codes";
+import { Responder } from "../middlewares/responder";
 
 class Response {
   static get STATUS_CODES() {
@@ -21,7 +21,7 @@ class Response {
    * return Response.success(ctx, { user: user_data });
    */
   static success(ctx, content) {
-    format_response(ctx, this.STATUS_CODES.OK, content);
+    Responder(ctx, this.STATUS_CODES.OK, content);
   }
 
   /**
@@ -32,7 +32,7 @@ class Response {
    * Response.success(ctx, { user: user_data });
    */
   static created(ctx, content) {
-    format_response(ctx, this.STATUS_CODES.CREATED, content);
+    Responder(ctx, this.STATUS_CODES.CREATED, content);
   }
 
   /**
@@ -42,30 +42,30 @@ class Response {
    * Response.noContent(ctx);
    */
   static noContent(ctx) {
-    format_response(ctx, this.STATUS_CODES.NO_CONTENT);
+    Responder(ctx, this.STATUS_CODES.NO_CONTENT);
   }
 
   /**
    * Return Response with code 404.
    * @param {*} ctx
    * @example
-   * Response.notFound(ctx, 'User');
+   * Response.notFound(ctx, "User");
    */
   static notFound(ctx, resource_name) {
-    format_response(ctx, this.STATUS_CODES.NOT_FOUND, {
+    Responder(ctx, this.STATUS_CODES.NOT_FOUND, {
       error: {
-        name: 'NOT_FOUND',
+        name: "NOT_FOUND",
         resource: resource_name,
-        message: 'Selected resource was not found'
+        message: "Selected resource was not found"
       }
     });
   }
 
   static unauthorized(ctx) {
-    format_response(ctx, this.STATUS_CODES.UNAUTHORIZED, {
+    Responder(ctx, this.STATUS_CODES.UNAUTHORIZED, {
       error: {
-        name: 'UNAUTHORIZED',
-        message: 'Username or password is incorrect'
+        name: "UNAUTHORIZED",
+        message: "Route requires authorization"
       }
     });
   }
@@ -77,14 +77,14 @@ class Response {
    * @returns
    *
    * @example
-   * Response.error(ctx, 'BAD_REQUEST', 'User params are invalid');
+   * Response.error(ctx, "BAD_REQUEST", "User params are invalid");
    */
   static error(ctx, event, content) {
     let status = this.STATUS_CODES[event] || ctx.status;
     if (status == 500)
       status = this.STATUS_CODES.INTERNAL_SERVER_ERROR;
 
-    format_response(ctx, this.STATUS_CODES[event], content);
+    Responder(ctx, this.STATUS_CODES[event], content);
   }
 }
 
