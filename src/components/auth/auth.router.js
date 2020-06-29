@@ -12,13 +12,13 @@ import {
 } from "../../global/middlewares";
 import { AuthController } from "./auth.controller";
 
-const AuthRouter = new Router({ prefix: "/auth" });
+const authRouter = new Router({ prefix: "/auth" });
 const authController = new AuthController();
 
-AuthRouter
+authRouter
   .get("/token",
     hasAuthorizationHeaders,
-    authController.SignIn
+    authController.signIn
   );
 
-export default AuthRouter;
+export default authRouter;

@@ -14,12 +14,12 @@ import helmet from "koa-helmet";
 import compress from "koa-compress";
 
 import {
-  BodyParser,
-  Error_Handler
+  requestParser,
+  errorHandler
 } from "./global/middlewares";
 
 import baseRouter from "./routes";
-import Logger from "./loaders/logger";
+import logger from "./global/utils/logger";
 
 class App extends Koa {
   /**
@@ -56,7 +56,7 @@ class App extends Koa {
     /**
      * Main app logger
      */
-    this.use(morgan("tiny", { stream: Logger.stream }));
+    this.use(morgan("tiny", { stream: logger.stream }));
     /**
     * Compress middleware for Koa
     */
@@ -64,11 +64,11 @@ class App extends Koa {
     /**
      * Error middleware
      */
-    this.use(Error_Handler);
+    this.use(errorHandler);
     /**
      * Parse request payload
      */
-    this.use(BodyParser({
+    this.use(requestParser({
       enableTypes: ["json"],
       jsonLimit: "5mb"
     }));

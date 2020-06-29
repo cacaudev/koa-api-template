@@ -1,18 +1,18 @@
 /* eslint-disable max-len */
 /* eslint-disable indent */
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const chalk = require('chalk');
-const Logger = require('../../src/loaders/logger');
+const fs = require("fs");
+const path = require("path");
+const Sequelize = require("sequelize");
+const chalk = require("chalk");
+const logger = require("../../src/global/utils/logger");
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config.js')[env];
+const env = process.env.NODE_ENV || "development";
+const config = require(__dirname + "/../config.js")[env];
 const db = {};
 
-let SequelizeMock = require('sequelize-mock');
+let SequelizeMock = require("sequelize-mock");
 var DBConnectionMock = new SequelizeMock();
 
 let sequelize;
@@ -22,7 +22,7 @@ let sequelize;
  * lib to simulate a db connection
  */
 
-if (env !== 'test') {
+if (env !== "test") {
 
   if (config.url) {
     // Establish connection
@@ -38,17 +38,17 @@ if (env !== 'test') {
     sequelize
       .authenticate()
       .then(() => {
-        if (env == 'development' || env == 'stage') {
-          Logger.info(
+        if (env == "development" || env == "stage") {
+          logger.info(
             chalk.greenBright(`\n-------\nDatabase:
           mode: [${chalk.magentaBright(`${env}`)}]
-          ${chalk.black.bgGreenBright('Connection established successfully.')}\n-------`
+          ${chalk.black.bgGreenBright("Connection established successfully.")}\n-------`
             )
           );
         }
       })
       .catch(err => {
-        Logger.error(
+        logger.error(
           chalk.greenBright(`\n-------\nDatabase:
         mode: [${chalk.bgRed(`${env}`)}]
         error: ${chalk.black.bgRedBright(`Unable to connect to database: ${err}`)}
@@ -57,30 +57,28 @@ if (env !== 'test') {
         );
       });
   } else
-    Logger.error(`
+    logger.error(`
     ${chalk.black.bgRedBright(
-      'Database url do not exist on db config file for the requested env mode.'
+      "Database url do not exist on db config file for the requested env mode."
     )}`);
 }
 
-if (env == 'development' || env == 'production' || env == 'stage') {
-
+if (env == "development" || env == "production" || env == "stage") {
   fs
     .readdirSync(__dirname)
     .filter(file => {
-      return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js') && (file.slice(-8) !== '.mock.js');
+      return (file.indexOf(".") !== 0) && (file !== basename) && (file.slice(-3) === ".js") && (file.slice(-8) !== ".mock.js");
     })
     .forEach(file => {
-      const model = sequelize['import'](path.join(__dirname, file));
+      const model = sequelize["import"](path.join(__dirname, file));
       db[model.name] = model;
     });
 
 } else {
-
   fs
     .readdirSync(__dirname)
     .filter(file => {
-      return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-8) === '.mock.js');
+      return (file.indexOf(".") !== 0) && (file !== basename) && (file.slice(-8) === ".mock.js");
     })
     .forEach(file => {
       let model = require(path.join(__dirname, file))(DBConnectionMock);
@@ -94,7 +92,7 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-if (env == 'development' || env == 'production' || env == 'stage') {
+if (env == "development" || env == "production" || env == "stage") {
   db.sequelize = sequelize;
   db.Sequelize = Sequelize;
 }

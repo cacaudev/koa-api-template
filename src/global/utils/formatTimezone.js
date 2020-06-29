@@ -14,7 +14,7 @@ import config from "../../../config";
  * @param {array} timestamp
  * @param {string} timezone
  */
-const FormatTimezone = async (timestamp, timezone) => {
+const formatTimezone = async (timestamp, timezone) => {
   const raw_date = moment(timestamp);
   const format_date = ((date) => {
     // Brazil DST
@@ -33,4 +33,4 @@ const FormatTimezone = async (timestamp, timezone) => {
   return format_date(raw_date);
 };
 
-export { FormatTimezone };
+export { formatTimezone };

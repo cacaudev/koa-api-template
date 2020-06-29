@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-import * as _ from 'lodash';
-import randtoken from 'rand-token';
-import { User } from '../../../db/models';
+import * as _ from "lodash";
+import randtoken from "rand-token";
+import { User } from "../../../db/models";
 import {
-  FormatTimezone,
+  formatTimezone,
   encryptPassword
-} from '../../global/utils';
+} from "../../global/utils";
 
 class UserService {
   /**
@@ -22,8 +22,8 @@ class UserService {
   constructor() {
     this.userModel = User;
     this.dateFields = [
-      'createdAt',
-      'updatedAt'
+      "createdAt",
+      "updatedAt"
     ];
   }
 
@@ -39,9 +39,9 @@ class UserService {
    * @example
    * let user_record = await userServiceInstance.Create(user_data);
    */
-  async Create(user_input) {
+  async create(user_input) {
     const id = randtoken.generator().generate(36);
-    user_input.timezone = 'America/Sao_Paulo';
+    user_input.timezone = "America/Sao_Paulo";
     const encrypted_password = await encryptPassword(user_input.password);
 
     if (encrypted_password.error)
@@ -62,11 +62,11 @@ class UserService {
    * @example
    * let user_record = await userServiceInstance.Read(user_data);
    */
-  async GetById(id) {
+  async getById(id) {
     return await this.userModel.findByPk(id, { raw: true });
   }
 
-  async List({ offset = 0, limit = 1000 }) {
+  async list({ offset = 0, limit = 1000 }) {
     return await this.userModel.findAndCountAll({
       offset,
       limit,
@@ -74,7 +74,7 @@ class UserService {
     });
   }
 
-  async UpdateById(id, user_input) {
+  async updateById(id, user_input) {
     return await this.userModel.update(
       user_input,
       {
@@ -85,17 +85,17 @@ class UserService {
     );
   }
 
-  async DeleteById(id) {
+  async deleteById(id) {
     return await this.userModel.destroy({ where: { id } });
   }
 
-  async Serialize(user_input) {
+  async serialize(user_input) {
     if (user_input.password)
       user_input.password = undefined;
 
     let dates = _.pick(user_input, this.dateFields);
     for (var key in dates)
-      user_input[key] = await FormatTimezone(dates[key], user_input.timezone);
+      user_input[key] = await formatTimezone(dates[key], user_input.timezone);
 
     return user_input;
   }

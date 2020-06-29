@@ -6,7 +6,7 @@
 "use strict";
 
 import bodyParser from "koa-bodyparser";
-import Logger from "../../loaders/logger";
+import logger from "../utils";
 /**
  * Return middleware that parses HTTP request body.
  * @module body_parser
@@ -16,13 +16,12 @@ import Logger from "../../loaders/logger";
  * @return {function} Convert request body to JSON type
  * @throws {InvalidMediaType} When the request format is invalid.
  */
-const BodyParser = (options = {}) => {
+export function requestParser(options = {}) {
   return bodyParser({
     ...options,
     onerror: () => {
-      Logger.error("Error: Invalid format is detected in the request body");
+      logger.error("Error: Invalid format is detected in the request body");
     }
   });
-};
+}
 
-export { BodyParser };

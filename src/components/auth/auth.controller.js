@@ -6,19 +6,19 @@
 "use strict";
 
 import { AuthService } from "./auth.service";
-import { BasicAuthParser } from "./utils";
-import Response from "../../global/utils/response.class";
+import { basicAuthParser } from "./utils";
+import Response from "../../global/utils/response";
 
 class AuthController {
-  async SignIn(ctx) {
+  async signIn(ctx) {
     let authHeader = ctx.request.headers["authorization"];
-    const { username, password } = await BasicAuthParser(authHeader);
+    const { username, password } = await basicAuthParser(authHeader);
 
-    const AuthInstance = new AuthService();
-    return await AuthInstance
-      .Authenticate({ username, password })
+    const authInstance = new AuthService();
+    return await authInstance
+      .authenticate({ username, password })
       .then(async (user_id) => {
-        const token = await AuthInstance.GenerateToken(user_id);
+        const token = await authInstance.generateToken(user_id);
         return Response.success(ctx, {
           access_token: token,
           token_type: "Bearer",

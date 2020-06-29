@@ -3,7 +3,7 @@
  * Author: Cacaudev
  * Date: 08/11/2019
 */
-'use strict';
+"use strict";
 
 /**
  * HTTP Status codes

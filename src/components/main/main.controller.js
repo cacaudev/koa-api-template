@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-import os from 'os';
-import { LocaleService } from '../../i18n/locale.service';
-import swaggerSpec from '../../../config/swagger.config';
-import appInfo from '../../../package.json';
-import Response from '../../global/utils/response.class';
+import os from "os";
+import { LocaleService } from "../../i18n/locale.service";
+import swaggerSpec from "../../../config/swagger.config";
+import appInfo from "../../../package.json";
+import Response from "../../global/utils/response";
 
 class MainController {
   async getApiInfo(ctx) {
@@ -25,7 +25,7 @@ class MainController {
     };
 
     return Response.success(ctx, {
-      message: i18n._t('info:welcome'),
+      message: i18n._t("info:welcome"),
       info: data
     });
   }
@@ -33,11 +33,11 @@ class MainController {
   async status(ctx) {
     return Response.success(ctx, {
       services: [{
-        name: 'auth',
-        status: 'ok'
+        name: "auth",
+        status: "ok"
       }, {
-        name: 'dashboard',
-        status: 'ok'
+        name: "dashboard",
+        status: "ok"
       }]
     });
   }

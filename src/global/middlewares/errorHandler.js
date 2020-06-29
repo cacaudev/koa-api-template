@@ -1,7 +1,7 @@
 "use static";
-import Response from "../utils/response.class";
+import Response from "../utils/response";
 
-const Error_Handler = async (ctx, next) => {
+export async function errorHandler(ctx, next) {
   try {
     await next();
   } catch (error) {
@@ -60,6 +60,4 @@ const Error_Handler = async (ctx, next) => {
   }
 
   return;
-};
-
-export { Error_Handler };
+}

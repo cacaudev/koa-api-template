@@ -5,11 +5,11 @@
 */
 "use strict";
 
-const Responder = (ctx, status, content = null) => {
+const responder = (ctx, status, content = null) => {
   ctx.status = status;
   ctx.type = "application/json";
   ctx.body = content;
   return;
 };
 
-export default Responder;
+export { responder };

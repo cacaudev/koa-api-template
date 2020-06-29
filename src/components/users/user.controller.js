@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-import _ from 'lodash';
-import { UserService } from './user.service';
-import { Paginate } from '../../global/utils';
-import Response from '../../global/utils/response.class';
+import _ from "lodash";
+import { UserService } from "./user.service";
+import { paginate } from "../../global/utils";
+import Response from "../../global/utils/response";
 
 class UserController {
   async create(ctx) {
@@ -18,7 +18,7 @@ class UserController {
         });
       })
       .catch((err) => Response.error(ctx,
-        'BAD_REQUEST',
+        "BAD_REQUEST",
         `Error trying to create user: ${err}`
       ));
   }
@@ -28,17 +28,17 @@ class UserController {
     const userInstance = new UserService();
 
     return await userInstance
-      .GetById(user_Id)
+      .getById(user_Id)
       .then(async (result) => {
         if (!result)
-          Response.notFound(ctx, 'User');
+          Response.notFound(ctx, "User");
         else
           Response.success(ctx, {
-            user: await userInstance.Serialize(result)
+            user: await userInstance.serialize(result)
           });
       })
       .catch((err) => Response.error(ctx,
-        'BAD_REQUEST',
+        "BAD_REQUEST",
         `Error trying to read user: ${err}`
       ));
   }
@@ -49,17 +49,17 @@ class UserController {
     const userInstance = new UserService();
 
     return await userInstance
-      .UpdateById(user_Id, user_data)
+      .updateById(user_Id, user_data)
       .then(async ([updatedRows, [updatedResources]]) => {
         if (updatedRows == 0)
-          Response.notFound(ctx, 'User');
+          Response.notFound(ctx, "User");
         else
           Response.success(ctx, {
-            user: await userInstance.Serialize(updatedResources)
+            user: await userInstance.serialize(updatedResources)
           });
       })
       .catch((err) => Response.error(ctx,
-        'BAD_REQUEST',
+        "BAD_REQUEST",
         `Error trying to update user: ${err}`
       ));
   }
@@ -69,15 +69,15 @@ class UserController {
     const userInstance = new UserService();
 
     return await userInstance
-      .DeleteById(user_Id)
+      .deleteById(user_Id)
       .then((result) => {
         if (result == 0)
-          Response.notFound(ctx, 'User');
+          Response.notFound(ctx, "User");
         else
           Response.noContent(ctx, {});
       })
       .catch((err) => Response.error(ctx,
-        'BAD_REQUEST',
+        "BAD_REQUEST",
         `Error trying to delete user: ${err}`
       ));
   }
@@ -87,15 +87,15 @@ class UserController {
     let query = {};
 
     if (ctx.query.page && ctx.query.limit_by_page)
-      query = await Paginate(ctx.query.page, ctx.query.limit_by_page);
+      query = await paginate(ctx.query.page, ctx.query.limit_by_page);
 
     return await userInstance
-      .List(query)
+      .list(query)
       .then(async (users) => {
         if (users.count == 0)
           return Response.noContent(ctx, {});
 
-        users['rows'].map((user) => userInstance.Serialize(user));
+        users["rows"].map((user) => userInstance.serialize(user));
 
         let result = { users: users.rows };
         let pagination_info;
@@ -115,7 +115,7 @@ class UserController {
         );
       })
       .catch((err) => Response.error(ctx,
-        'BAD_REQUEST',
+        "BAD_REQUEST",
         `Error trying to list users: ${err}`
       ));
   }

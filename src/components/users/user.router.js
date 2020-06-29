@@ -17,10 +17,10 @@ import {
   hasUpdateBody
 } from "./user.middleware";
 
-const UserRouter = new Router({ prefix: "/user" });
+const userRouter = new Router({ prefix: "/user" });
 const userController = new UserController();
 
-UserRouter
+userRouter
   .post("/",
     hasCredentials,
     hasCreateBody,
@@ -44,4 +44,4 @@ UserRouter
     userController.list
   );
 
-export default UserRouter;
+export default userRouter;

@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import { User } from '../../../db/models';
-import config from '../../../config';
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { User } from "../../../db/models";
+import config from "../../../config";
 
 class AuthService {
   /**
@@ -25,10 +25,10 @@ class AuthService {
    * @param {string} username
    * @param {string} password
    */
-  async Authenticate({ username, password }) {
+  async authenticate({ username, password }) {
     const userFound = await this.userModel.findOne({
       where: { username },
-      attributes: ['id', 'username', 'password'],
+      attributes: ["id", "username", "password"],
       raw: true
     });
     if (userFound)
@@ -38,15 +38,15 @@ class AuthService {
     throw new Error();
   }
 
-  async GenerateToken(user_id) {
+  async generateToken(user_id) {
     let token = {};
     try {
       token = jwt.sign({
         userId: user_id,
-        type: 'default'
+        type: "default"
       }, config.auth.jwt_secret, {
-        algorithm: 'HS256',
-        expiresIn: '7d' // 7 days
+        algorithm: "HS256",
+        expiresIn: "7d" // 7 days
       });
     } catch (error) {
       throw new Error();

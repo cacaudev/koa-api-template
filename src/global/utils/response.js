@@ -5,8 +5,8 @@
 */
 "use strict";
 
-import STATUS_CODES from "../../static/status_codes";
-import { Responder } from "../middlewares/responder";
+import STATUS_CODES from "../../static/statusCodes";
+import { responder } from "../middlewares/responder";
 
 class Response {
   static get STATUS_CODES() {
@@ -21,7 +21,7 @@ class Response {
    * return Response.success(ctx, { user: user_data });
    */
   static success(ctx, content) {
-    Responder(ctx, this.STATUS_CODES.OK, content);
+    responder(ctx, this.STATUS_CODES.OK, content);
   }
 
   /**
@@ -32,7 +32,7 @@ class Response {
    * Response.success(ctx, { user: user_data });
    */
   static created(ctx, content) {
-    Responder(ctx, this.STATUS_CODES.CREATED, content);
+    responder(ctx, this.STATUS_CODES.CREATED, content);
   }
 
   /**
@@ -42,7 +42,7 @@ class Response {
    * Response.noContent(ctx);
    */
   static noContent(ctx) {
-    Responder(ctx, this.STATUS_CODES.NO_CONTENT);
+    responder(ctx, this.STATUS_CODES.NO_CONTENT);
   }
 
   /**
@@ -52,7 +52,7 @@ class Response {
    * Response.notFound(ctx, "User");
    */
   static notFound(ctx, resource_name) {
-    Responder(ctx, this.STATUS_CODES.NOT_FOUND, {
+    responder(ctx, this.STATUS_CODES.NOT_FOUND, {
       error: {
         name: "NOT_FOUND",
         resource: resource_name,
@@ -62,7 +62,7 @@ class Response {
   }
 
   static unauthorized(ctx) {
-    Responder(ctx, this.STATUS_CODES.UNAUTHORIZED, {
+    responder(ctx, this.STATUS_CODES.UNAUTHORIZED, {
       error: {
         name: "UNAUTHORIZED",
         message: "Route requires authorization"
@@ -84,7 +84,7 @@ class Response {
     if (status == 500)
       status = this.STATUS_CODES.INTERNAL_SERVER_ERROR;
 
-    Responder(ctx, this.STATUS_CODES[event], content);
+    responder(ctx, this.STATUS_CODES[event], content);
   }
 }
 

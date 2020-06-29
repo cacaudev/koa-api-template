@@ -4,15 +4,15 @@
  * Author: cacaudev
  * Date: 27/09/2019
 */
-'use strict';
+"use strict";
 
-import winston from 'winston';
+import winston from "winston";
 
 /**
  * Instantiate an Winston Logger.
  * @module Logger
  */
-var Logger = winston.createLogger({
+var logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
       format: winston.format.simple()
@@ -28,12 +28,12 @@ var Logger = winston.createLogger({
  * @param {string} message - Message to log on console
  *
  * @example
- * morgan('tiny', { stream: Logger.stream })
+ * morgan("tiny", { stream: Logger.stream })
  */
-Logger.stream = {
+logger.stream = {
   write: function (message) {
-    Logger.info(message.substring(0, message.lastIndexOf('\n')));
+    logger.info(message.substring(0, message.lastIndexOf("\n")));
   },
 };
 
-module.exports = Logger;
+module.exports = logger;

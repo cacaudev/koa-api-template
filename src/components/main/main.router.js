@@ -4,17 +4,17 @@
  * author: Cacaudev
  * Date: 06/11/2019
 */
-'use strict';
+"use strict";
 
-import Router from 'koa-router';
-import { MainController } from './main.controller';
+import Router from "koa-router";
+import { MainController } from "./main.controller";
 
-const MainRouter = new Router;
+const mainRouter = new Router;
 const mainController = new MainController();
 
-MainRouter
-  .get('/', mainController.getApiInfo)
-  .get('/spec', mainController.spec)
-  .get('/status', mainController.status);
+mainRouter
+  .get("/", mainController.getApiInfo)
+  .get("/spec", mainController.spec)
+  .get("/status", mainController.status);
 
-export default MainRouter;
+export default mainRouter;
