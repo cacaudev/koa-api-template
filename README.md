@@ -68,12 +68,10 @@ $ npm run test
 - [x] Errors Emitter 'Layer'
 - [x] Timezone configuration
 - [x] Pagination support
+- [ ] Convert to Typescript
 - [ ] Bcrypt Authorization and Protection
 - [ ] JWT Authentication Layer
-- [ ] Dependency Injection (Awilix)
-- [ ] JSDoc with Swagger Documentation
+- [ ] JSDoc/Swagger/ESDoc Documentation
 - [ ] Unit tests (Jest and SuperTest)
-- [ ] Status Monitor
 - [ ] Deploy server on Heroku
 - [ ] Continuous integration with TravisCI
-
