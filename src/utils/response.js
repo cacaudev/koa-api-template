@@ -5,7 +5,7 @@
 */
 "use strict";
 
-import STATUS_CODES from "../../static/statusCodes";
+import STATUS_CODES from "../static/statusCodes";
 import { responder } from "../middlewares/responder";
 
 class Response {
@@ -66,6 +66,15 @@ class Response {
       error: {
         name: "UNAUTHORIZED",
         message: "Route requires authorization"
+      }
+    });
+  }
+
+  static methodNotAllowed(ctx) {
+    responder(ctx, this.STATUS_CODES.METHOD_NOT_ALLOWED, {
+      error: {
+        name: "METHOD_NOT_ALLOWED",
+        message: "REST Method not allowed"
       }
     });
   }

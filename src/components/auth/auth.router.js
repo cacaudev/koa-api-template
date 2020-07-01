@@ -9,7 +9,7 @@
 import Router from "koa-router";
 import {
   hasAuthorizationHeaders
-} from "../../global/middlewares";
+} from "../../middlewares";
 import { AuthController } from "./auth.controller";
 
 const authRouter = new Router({ prefix: "/auth" });

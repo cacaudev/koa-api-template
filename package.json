@@ -15,7 +15,7 @@
     "create:db": "cross-env NODE_ENV=development npx sequelize db:create",
     "migrate:db": "cross-env NODE_ENV=development npx sequelize db:migrate",
     "seed:db": "cross-env NODE_ENV=development npx sequelize db:seed:all",
-    "reset:db": "cross-env NODE_ENV=development npm run create:db && npm run migrate:db",
+    "reset:db": "cross-env NODE_ENV=development npx sequelize db:migrate:undo:all && npm run migrate:db",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles --forceExit"
   },
   "repository": {

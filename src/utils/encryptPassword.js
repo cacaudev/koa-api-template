@@ -5,7 +5,7 @@
   and extract user credentials.
 */
 
-import config from "../../../config";
+import config from "../../config";
 import bcrypt from "bcryptjs";
 
 const encryptPassword = async (password) => {

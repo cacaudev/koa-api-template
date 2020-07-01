@@ -9,7 +9,7 @@
 
 import Router from "koa-router";
 import { UserController } from "./user.controller";
-import { hasPaginationParams } from "../../global/middlewares";
+import { hasPaginationParams } from "../../middlewares";
 import {
   hasParams,
   hasCredentials,

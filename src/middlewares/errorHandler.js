@@ -44,6 +44,12 @@ export async function errorHandler(ctx, next) {
           "Selected resource was not found"
         );
         break;
+      case "methodNotAllowed":
+        Response.error(ctx,
+          "METHOD_NOT_ALLOWED",
+          "Route does not exist."
+        );
+        break;
       default:
         console.log(error);
         Response.error(ctx,

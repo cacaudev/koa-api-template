@@ -19,9 +19,12 @@ import logger from "../utils";
 export function requestParser(options = {}) {
   return bodyParser({
     ...options,
-    onerror: () => {
-      logger.error("Error: Invalid format is detected in the request body");
-    }
+    onerror: (error) => {
+      error.status = 413; // Payload too big
+      error.name = "BAD_REQUEST";
+      throw error;
+    },
+    parsedMethods: ["POST", "PUT", "PATCH", "DELETE"]
   });
 }
 

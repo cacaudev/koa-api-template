@@ -7,7 +7,7 @@
 "use strict";
 
 import moment from "moment-timezone";
-import config from "../../../config";
+import config from "../../config";
 
 /**
  * @desc Format timestamp accordingly with a timezone

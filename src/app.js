@@ -16,10 +16,10 @@ import compress from "koa-compress";
 import {
   requestParser,
   errorHandler
-} from "./global/middlewares";
+} from "./middlewares";
 
-import baseRouter from "./routes";
-import logger from "./global/utils/logger";
+import baseRouter from "./routes/baseRouter";
+import logger from "./utils/logger";
 
 class App extends Koa {
   /**

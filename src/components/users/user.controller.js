@@ -2,8 +2,8 @@
 
 import _ from "lodash";
 import { UserService } from "./user.service";
-import { paginate } from "../../global/utils";
-import Response from "../../global/utils/response";
+import { paginate } from "../../utils";
+import Response from "../../utils/response";
 
 class UserController {
   async create(ctx) {

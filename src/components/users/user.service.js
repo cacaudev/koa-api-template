@@ -2,11 +2,11 @@
 
 import * as _ from "lodash";
 import randtoken from "rand-token";
-import { User } from "../../../db/models";
+import { User } from "../../../db/schemas";
 import {
   formatTimezone,
   encryptPassword
-} from "../../global/utils";
+} from "../../utils";
 
 class UserService {
   /**

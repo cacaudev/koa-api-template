@@ -2,7 +2,7 @@
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { User } from "../../../db/models";
+import { User } from "../../../db/schemas";
 import config from "../../../config";
 
 class AuthService {

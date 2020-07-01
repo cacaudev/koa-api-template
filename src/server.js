@@ -10,7 +10,7 @@
 import chalk from "chalk";
 import config from "../config";
 import App from "./app";
-import logger from "./global/utils/logger";
+import logger from "./utils/logger";
 
 const app = new App();
 

@@ -7,7 +7,7 @@
 
 import { AuthService } from "./auth.service";
 import { basicAuthParser } from "./utils";
-import Response from "../../global/utils/response";
+import Response from "../../utils/response";
 
 class AuthController {
   async signIn(ctx) {
