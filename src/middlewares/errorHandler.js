@@ -6,6 +6,14 @@ export async function errorHandler(ctx, next) {
     await next();
   } catch (error) {
     switch (error.name) {
+      case "SequelizeDatabaseError":
+        Response.error(ctx, "BAD_REQUEST", {
+          error: {
+            name: error.name,
+            message: error.message
+          }
+        });
+        break;
       case "TypeError":
         Response.error(ctx, "BAD_REQUEST", {
           error: {

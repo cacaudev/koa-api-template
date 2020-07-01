@@ -93,7 +93,12 @@ class Response {
     if (status == 500)
       status = this.STATUS_CODES.INTERNAL_SERVER_ERROR;
 
-    responder(ctx, this.STATUS_CODES[event], content);
+    responder(ctx, this.STATUS_CODES[event], {
+      error: {
+        name: this.STATUS_CODES[event],
+        message: content
+      }
+    });
   }
 }
 

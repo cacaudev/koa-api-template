@@ -9,10 +9,7 @@
 import validator, { Joi } from "koa-context-validator";
 
 const paramsSchema = Joi.object().keys({
-  params: Joi.object().keys({
-    userId: Joi.string()
-      .length(36)
-  })
+  userId: Joi.string().guid()
 });
 
 const bodySchema = Joi.object().keys({
@@ -50,7 +47,7 @@ const hasParams = validator({
 });
 
 const hasCreateBody = validator({
-  body: bodySchema.options({ presence: "required" })
+  body: credentialsSchema.options({ presence: "required" })
 });
 
 const hasUpdateBody = validator({

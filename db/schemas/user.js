@@ -2,7 +2,7 @@
  * @Author: cacaudev
  * @Date: 2020-06-30 20:50:36
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-06-30 20:55:29
+ * @Last Modified time: 2020-06-30 21:45:04
  */
 "use strict";
 
@@ -30,8 +30,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM,
       values: ["EMAIL", "GOOGLE", "FACEBOOK"]
     },
-    timezone: DataTypes.STRING
-  }, {});
+    timezone: {
+      type: DataTypes.STRING,
+      defaultValue: "America/Sao_Paulo"
+    }
+  }, {
+    createdAt: false,
+    updatedAt: false,
+    freezeTableName: true
+  });
   user.associate = function (models) {
     // associations can be defined here
   };

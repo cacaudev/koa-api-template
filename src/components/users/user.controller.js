@@ -14,7 +14,7 @@ class UserController {
       .create(user_data)
       .then(async (result) => {
         Response.created(ctx, {
-          user: await userInstance.Serialize(result)
+          user: result
         });
       })
       .catch((err) => Response.error(ctx,
@@ -24,14 +24,14 @@ class UserController {
   }
 
   async read(ctx) {
-    const user_Id = ctx.params.userId;
+    const userId = ctx.params.userId;
     const userInstance = new UserService();
 
     return await userInstance
-      .getById(user_Id)
+      .getById(userId)
       .then(async (result) => {
         if (!result)
-          Response.notFound(ctx, "User");
+          Response.notFound(ctx, "user");
         else
           Response.success(ctx, {
             user: await userInstance.serialize(result)

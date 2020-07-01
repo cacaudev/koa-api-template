@@ -1,8 +1,7 @@
 "use strict";
 
 import * as _ from "lodash";
-import randtoken from "rand-token";
-import { User } from "../../../db/schemas";
+import { user } from "../../../db/schemas";
 import {
   formatTimezone,
   encryptPassword
@@ -20,7 +19,7 @@ class UserService {
    */
 
   constructor() {
-    this.userModel = User;
+    this.userModel = user;
     this.dateFields = [
       "createdAt",
       "updatedAt"
@@ -40,15 +39,13 @@ class UserService {
    * let user_record = await userServiceInstance.Create(user_data);
    */
   async create(user_input) {
-    const id = randtoken.generator().generate(36);
-    user_input.timezone = "America/Sao_Paulo";
+    let payload = user_input;
+    delete payload.confirm_password;
     const encrypted_password = await encryptPassword(user_input.password);
-
     if (encrypted_password.error)
       return null;
-
     user_input.password = encrypted_password;
-    return await this.userModel.create({ id, ...user_input });
+    return await this.userModel.create(user_input);
   }
 
   /**
