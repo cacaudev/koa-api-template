@@ -6,6 +6,14 @@ export async function errorHandler(ctx, next) {
     await next();
   } catch (error) {
     switch (error.name) {
+      case "SequelizeUniqueConstraintError":
+        Response.error(ctx, "BAD_REQUEST", {
+          error: {
+            name: error.name,
+            message: error.message
+          }
+        });
+        break;
       case "SequelizeDatabaseError":
         Response.error(ctx, "BAD_REQUEST", {
           error: {
@@ -26,11 +34,9 @@ export async function errorHandler(ctx, next) {
         Response.error(ctx,
           "BAD_REQUEST",
           {
-            error: {
-              name: error.name,
-              field: error.details[0].path,
-              response: error.details[0].message.replace(/"/g, "")
-            }
+            name: error.name,
+            field: error.details[0].path,
+            response: error.details[0].message.replace(/"/g, "")
           }
         );
         break;

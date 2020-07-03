@@ -2,53 +2,48 @@
  * @Author: cacaudev
  * @Date: 2020-06-30 20:50:28
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-06-30 20:55:30
+ * @Last Modified time: 2020-07-03 18:45:59
  */
 "use strict";
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("user", {
+    const userSchema = {
       id: {
         allowNull: false,
+        type: Sequelize.UUID,
         primaryKey: true,
-        type: Sequelize.UUID
+        defaultValue: Sequelize.UUIDV4
       },
       username: {
         allowNull: false,
-        type: Sequelize.STRING
+        unique: true,
+        type: Sequelize.STRING(128)
       },
-      password: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
+      password: Sequelize.STRING(288),
       email: {
+        type: Sequelize.STRING(256),
         allowNull: false,
-        type: Sequelize.STRING
+        unique: true
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      surname: {
-        type: Sequelize.STRING
-      },
-      phone: {
-        type: Sequelize.STRING
-      },
-      avatar: {
-        type: Sequelize.STRING
-      },
-      birthdate: {
-        type: Sequelize.DATEONLY
-      },
-      timezone: {
-        type: Sequelize.STRING
-      },
+      name: Sequelize.STRING(128),
+      surname: Sequelize.STRING(128),
+      phone: Sequelize.STRING,
+      birthdate: Sequelize.DATEONLY,
+      avatar: Sequelize.STRING,
       type: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM,
+        values: ["DEFAULT", "ADMIN"],
+        defaultValue: "DEFAULT"
       },
       login_type: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM,
+        values: ["EMAIL", "GOOGLE", "FACEBOOK"],
+        defaultValue: "EMAIL"
+      },
+      timezone: {
+        type: Sequelize.STRING,
+        defaultValue: "America/Sao_Paulo"
       },
       created_at: {
         allowNull: false,
@@ -58,7 +53,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    };
+    return queryInterface.createTable("user", userSchema);
   },
   down: (queryInterface) => {
     return queryInterface.dropTable("user");

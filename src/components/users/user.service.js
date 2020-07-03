@@ -2,7 +2,7 @@
  * @Author: cacaudev
  * @Date: 2020-07-03 17:13:21
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-03 17:13:57
+ * @Last Modified time: 2020-07-03 19:04:38
  */
 "use strict";
 
@@ -36,30 +36,28 @@ class UserService {
   /**
    * @desc Create a new user
    * @method
-   * @param {Object} user_input
-   * @param {String} user_input.name - User name
-   * @param {String} user_input.surname - User surname
-   * @param {Number} user_input.age - User age
+   * @param {Object} userInput
+   * @param {String} userInput.name - User name
+   * @param {String} userInput.surname - User surname
+   * @param {Number} userInput.age - User age
    * @returns {Record} User Instance
    *
    * @example
    * let user_record = await userServiceInstance.Create(user_data);
    */
-  async create(user_input) {
-    let payload = user_input;
-    delete payload.confirm_password;
-    const encrypted_password = await encryptPassword(user_input.password);
-    if (encrypted_password.error)
+  async create(userInput) {
+    const encryptedPassword = await encryptPassword(userInput.password);
+    if (encryptedPassword.error)
       return null;
-    user_input.password = encrypted_password;
-    return await this.model.create(user_input);
+    userInput.password = encryptedPassword;
+    return await this.model.create(_.omit(userInput, ["confirm_password"]));
   }
   /**
    * @desc Read user
    * @method
-   * @param {Object} user_input
-   * @param {Object} user_input.name - User name
-   * @param {Object} user_input.surname - User surname
+   * @param {Object} userInput
+   * @param {Object} userInput.name - User name
+   * @param {Object} userInput.surname - User surname
    * @returns {Record} User Instance
    *
    * @example
@@ -75,9 +73,9 @@ class UserService {
       raw: true
     });
   }
-  async updateById(id, user_input) {
+  async updateById(id, userInput) {
     return await this.model.update(
-      user_input,
+      userInput,
       {
         returning: true, // Return the user record updated
         where: { id },
@@ -88,15 +86,15 @@ class UserService {
   async deleteById(id) {
     return await this.model.destroy({ where: { id } });
   }
-  async serialize(user_input) {
-    if (user_input.password)
-      user_input.password = undefined;
+  async serialize(userInput) {
+    if (userInput.password)
+      userInput.password = undefined;
 
-    let dates = _.pick(user_input, this.dateFields);
+    let dates = _.pick(userInput, this.dateFields);
     for (var key in dates)
-      user_input[key] = await formatTimezone(dates[key], user_input.timezone);
+      userInput[key] = await formatTimezone(dates[key], userInput.timezone);
 
-    return user_input;
+    return userInput;
   }
   /**
    *

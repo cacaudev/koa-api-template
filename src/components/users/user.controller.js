@@ -1,3 +1,9 @@
+/*
+ * @Author: cacaudev
+ * @Date: 2020-07-03 18:13:37
+ * @Last Modified by: cacaudev
+ * @Last Modified time: 2020-07-03 18:35:42
+ */
 "use strict";
 
 import _ from "lodash";
@@ -11,11 +17,12 @@ class UserController {
   }
 
   async create(ctx) {
+    const userInstance = new UserService();
     const user_data = ctx.request.body;
-    return await this.userInstance.create(user_data)
+    return await userInstance.create(user_data)
       .then(async (result) => {
         Response.created(ctx, {
-          user: result
+          user: await userInstance.serialize(result)
         });
       })
       .catch((err) => Response.error(ctx,
@@ -24,15 +31,16 @@ class UserController {
       ));
   }
   async read(ctx) {
+    const userInstance = new UserService();
     const { userId } = ctx.params;
-    return await this.userInstance
+    return await userInstance
       .getById(userId)
       .then(async (result) => {
         if (!result)
           Response.notFound(ctx, "user");
         else
           Response.success(ctx, {
-            user: await this.userInstance.serialize(result)
+            user: await userInstance.serialize(result)
           });
       })
       .catch((err) => Response.error(ctx,
@@ -42,16 +50,17 @@ class UserController {
   }
   async update(ctx) {
     const { userId } = ctx.params;
+    const userInstance = new UserService();
     const user_data = ctx.request.body;
 
-    return await this.userInstance
+    return await userInstance
       .updateById(userId, user_data)
       .then(async ([updatedRows, [updatedResources]]) => {
         if (updatedRows == 0)
           Response.notFound(ctx, "User");
         else
           Response.success(ctx, {
-            user: await this.userInstance.serialize(updatedResources)
+            user: await userInstance.serialize(updatedResources)
           });
       })
       .catch((err) => Response.error(ctx,
@@ -61,8 +70,9 @@ class UserController {
   }
   async delete(ctx) {
     const { userId } = ctx.params;
+    const userInstance = new UserService();
 
-    return await this.service
+    return await userInstance
       .deleteById(userId)
       .then((result) => {
         if (result == 0)
@@ -89,7 +99,7 @@ class UserController {
         if (users.count == 0)
           return Response.noContent(ctx, {});
 
-        users["rows"].map((user) => this.userInstance.serialize(user));
+        users["rows"].map((user) => userInstance.serialize(user));
 
         let result = { users: users.rows };
         let pagination_info;
