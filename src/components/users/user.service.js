@@ -1,7 +1,14 @@
+/*
+ * @Author: cacaudev
+ * @Date: 2020-07-03 17:13:21
+ * @Last Modified by: cacaudev
+ * @Last Modified time: 2020-07-03 17:13:57
+ */
 "use strict";
 
 import * as _ from "lodash";
-import { user } from "../../../db/schemas";
+import bcrypt from "bcryptjs";
+import { User } from "../../db/modelsLoader";
 import {
   formatTimezone,
   encryptPassword
@@ -11,7 +18,7 @@ class UserService {
   /**
    * @summary Create an AuthService Instance
    * @class
-   * @property {Sequelize_Model} userModel
+   * @property {Sequelize_Model} model
    * @returns {function} AuthService Instance
    *
    * @example
@@ -19,7 +26,7 @@ class UserService {
    */
 
   constructor() {
-    this.userModel = user;
+    this.model = User;
     this.dateFields = [
       "createdAt",
       "updatedAt"
@@ -45,9 +52,8 @@ class UserService {
     if (encrypted_password.error)
       return null;
     user_input.password = encrypted_password;
-    return await this.userModel.create(user_input);
+    return await this.model.create(user_input);
   }
-
   /**
    * @desc Read user
    * @method
@@ -60,19 +66,17 @@ class UserService {
    * let user_record = await userServiceInstance.Read(user_data);
    */
   async getById(id) {
-    return await this.userModel.findByPk(id, { raw: true });
+    return await this.model.findByPk(id, { raw: true });
   }
-
   async list({ offset = 0, limit = 1000 }) {
-    return await this.userModel.findAndCountAll({
+    return await this.model.findAndCountAll({
       offset,
       limit,
       raw: true
     });
   }
-
   async updateById(id, user_input) {
-    return await this.userModel.update(
+    return await this.model.update(
       user_input,
       {
         returning: true, // Return the user record updated
@@ -81,11 +85,9 @@ class UserService {
       }
     );
   }
-
   async deleteById(id) {
-    return await this.userModel.destroy({ where: { id } });
+    return await this.model.destroy({ where: { id } });
   }
-
   async serialize(user_input) {
     if (user_input.password)
       user_input.password = undefined;
@@ -95,6 +97,23 @@ class UserService {
       user_input[key] = await formatTimezone(dates[key], user_input.timezone);
 
     return user_input;
+  }
+  /**
+   *
+   * @param {string} username
+   * @param {string} password
+   */
+  async authenticate({ username, password }) {
+    const userFound = await this.model.findOne({
+      where: { username },
+      attributes: ["id", "username", "password"],
+      raw: true
+    });
+    if (userFound)
+      if (bcrypt.compareSync(password, userFound.password))
+        return userFound.id;
+
+    throw new Error();
   }
 }
 

@@ -1,8 +1,11 @@
 const path = require('path');
 
+/*
+ * This config is only used by sequelize cli,
+ * not to load models or connect to databases
+ */
 module.exports = {
   'config': path.resolve('db', 'config.js'),
   'models-path': path.resolve('db', 'schemas'),
-  'seeders-path': path.resolve('db', 'seeders'),
   'migrations-path': path.resolve('db', 'migrations')
 }

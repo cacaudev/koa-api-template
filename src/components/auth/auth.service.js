@@ -1,8 +1,7 @@
 "use strict";
 
-import bcrypt from "bcryptjs";
+
 import jwt from "jsonwebtoken";
-import { User } from "../../../db/schemas";
 import config from "../../../config";
 
 class AuthService {
@@ -16,27 +15,7 @@ class AuthService {
    * const auth_instance = new AuthService();
    */
 
-  constructor() {
-    this.userModel = User;
-  }
-
-  /**
-   *
-   * @param {string} username
-   * @param {string} password
-   */
-  async authenticate({ username, password }) {
-    const userFound = await this.userModel.findOne({
-      where: { username },
-      attributes: ["id", "username", "password"],
-      raw: true
-    });
-    if (userFound)
-      if (bcrypt.compareSync(password, userFound.password))
-        return userFound.id;
-
-    throw new Error();
-  }
+  constructor() { }
 
   async generateToken(user_id) {
     let token = {};
