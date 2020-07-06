@@ -7,10 +7,11 @@ export async function errorHandler(ctx, next) {
   } catch (error) {
     switch (error.name) {
       case "SequelizeUniqueConstraintError":
-        Response.error(ctx, "BAD_REQUEST", {
+        Response.error(ctx, "UNPROCESSABLE_ENTITY", {
           error: {
             name: error.name,
-            message: error.message
+            field: error.errors[0].path,
+            message: error.errors[0].message
           }
         });
         break;
@@ -65,7 +66,6 @@ export async function errorHandler(ctx, next) {
         );
         break;
       default:
-        console.log(error);
         Response.error(ctx,
           "INTERNAL_SERVER_ERROR",
           {

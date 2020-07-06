@@ -2,7 +2,7 @@
  * @Author: cacaudev
  * @Date: 2020-07-03 18:13:37
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-03 18:35:42
+ * @Last Modified time: 2020-07-06 12:42:43
  */
 "use strict";
 
@@ -19,16 +19,13 @@ class UserController {
   async create(ctx) {
     const userInstance = new UserService();
     const user_data = ctx.request.body;
-    return await userInstance.create(user_data)
+    return await userInstance
+      .create(user_data)
       .then(async (result) => {
         Response.created(ctx, {
           user: await userInstance.serialize(result)
         });
-      })
-      .catch((err) => Response.error(ctx,
-        "BAD_REQUEST",
-        `Error trying to create user: ${err}`
-      ));
+      });
   }
   async read(ctx) {
     const userInstance = new UserService();
@@ -42,11 +39,7 @@ class UserController {
           Response.success(ctx, {
             user: await userInstance.serialize(result)
           });
-      })
-      .catch((err) => Response.error(ctx,
-        "BAD_REQUEST",
-        `Error trying to read user: ${err}`
-      ));
+      });
   }
   async update(ctx) {
     const { userId } = ctx.params;
@@ -62,11 +55,7 @@ class UserController {
           Response.success(ctx, {
             user: await userInstance.serialize(updatedResources)
           });
-      })
-      .catch((err) => Response.error(ctx,
-        "BAD_REQUEST",
-        `Error trying to update user: ${err}`
-      ));
+      });
   }
   async delete(ctx) {
     const { userId } = ctx.params;
@@ -79,11 +68,7 @@ class UserController {
           Response.notFound(ctx, "User");
         else
           Response.noContent(ctx, {});
-      })
-      .catch((err) => Response.error(ctx,
-        "BAD_REQUEST",
-        `Error trying to delete user: ${err}`
-      ));
+      });
   }
   async list(ctx) {
     const userInstance = new UserService();
@@ -117,11 +102,7 @@ class UserController {
             Object.assign(pagination_info, result) :
             result
         );
-      })
-      .catch((err) => Response.error(ctx,
-        "BAD_REQUEST",
-        `Error trying to list users: ${err}`
-      ));
+      });
   }
 }
 

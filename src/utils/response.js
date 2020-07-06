@@ -88,17 +88,11 @@ class Response {
    * @example
    * Response.error(ctx, "BAD_REQUEST", "User params are invalid");
    */
-  static error(ctx, event, content) {
+  static error(ctx, event, content = {}) {
     let status = this.STATUS_CODES[event] || ctx.status;
     if (status == 500)
       status = this.STATUS_CODES.INTERNAL_SERVER_ERROR;
-
-    responder(ctx, this.STATUS_CODES[event], {
-      error: {
-        name: this.STATUS_CODES[event],
-        message: content
-      }
-    });
+    responder(ctx, this.STATUS_CODES[event], content);
   }
 }
 

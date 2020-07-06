@@ -76,10 +76,6 @@ class User extends Model {
       order: [["createdAt", "DESC"]]
     });
   }
-
-  getFullName() {
-    return `${this.name} ${this.surname}`;
-  }
 }
 
 module.exports = User;

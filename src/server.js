@@ -15,7 +15,6 @@ import logger from "./utils/logger";
 const app = new App();
 
 app.on("error", err => {
-  console.log('error from app', err);
   logger.error(err);
 });
 
