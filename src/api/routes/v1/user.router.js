@@ -8,14 +8,14 @@
 "use strict";
 
 import Router from "koa-router";
-import { UserController } from "./user.controller";
+import { UserController } from "../../controllers/user.controller";
 import { hasPaginationParams } from "../../middlewares";
 import {
   hasParams,
   hasCredentials,
   hasCreateBody,
   hasUpdateBody
-} from "./user.middleware";
+} from "../../components/users/user.middleware";
 
 const userRouter = new Router({ prefix: "/user" });
 const userController = new UserController();

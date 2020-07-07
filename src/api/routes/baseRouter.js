@@ -8,17 +8,20 @@
 "use strict";
 
 import Router from "koa-router";
-import mainRouter from "../components/main/main.router";
+import { MainController } from "../controllers";
 import v1Router from "./v1";
 import Response from "../utils/response";
 
 const baseRouter = new Router();
+const mainController = new MainController();
 
 baseRouter
-  .use(mainRouter.routes())
+  .get("/", mainController.getApiInfo)
+  .get("/spec", mainController.spec)
+  .get("/status", mainController.status)
   .use(v1Router.routes())
   .all("/*", async (ctx) => {
-    Response.methodNotAllowed(ctx);
+    new Response(ctx).methodNotAllowed();
   });
 
 export default baseRouter;

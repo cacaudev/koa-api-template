@@ -4,7 +4,6 @@
  * Author: Cacaudev
  * Date: 27/09/2019
 */
-
 "use strict";
 
 import Koa from "koa";
@@ -16,9 +15,9 @@ import compress from "koa-compress";
 import {
   requestParser,
   errorHandler
-} from "./middlewares";
+} from "./loaders";
 
-import baseRouter from "./routes/baseRouter";
+import baseRouter from "./api/routes/baseRouter";
 import logger from "./utils/logger";
 
 class App extends Koa {

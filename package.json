@@ -9,9 +9,11 @@
   },
   "scripts": {
     "start": "npm run lint && babel-node src/server.js",
+    "build": "babel src -d dist",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/server.js",
     "lint": "npx eslint src/**/*.js",
     "doc": "npx jsdoc -c ./conf.json",
+    "debug": "cross-env NODE_ENV=development nodemon --inspect --exec babel-node src/server.js",
     "create:db": "cross-env NODE_ENV=development npx sequelize db:create",
     "migrate:db": "cross-env NODE_ENV=development npx sequelize db:migrate",
     "seed:db": "cross-env NODE_ENV=development npx sequelize db:seed:all",

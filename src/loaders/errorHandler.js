@@ -5,9 +5,10 @@ export async function errorHandler(ctx, next) {
   try {
     await next();
   } catch (error) {
+    const response = new Response(ctx);
     switch (error.name) {
       case "SequelizeUniqueConstraintError":
-        Response.error(ctx, "UNPROCESSABLE_ENTITY", {
+        response.error("UNPROCESSABLE_ENTITY", {
           error: {
             name: error.name,
             field: error.errors[0].path,
@@ -16,7 +17,7 @@ export async function errorHandler(ctx, next) {
         });
         break;
       case "SequelizeDatabaseError":
-        Response.error(ctx, "BAD_REQUEST", {
+        response.error("BAD_REQUEST", {
           error: {
             name: error.name,
             message: error.message
@@ -24,7 +25,7 @@ export async function errorHandler(ctx, next) {
         });
         break;
       case "TypeError":
-        Response.error(ctx, "BAD_REQUEST", {
+        response.error("BAD_REQUEST", {
           error: {
             name: error.name,
             message: error.message
@@ -32,7 +33,7 @@ export async function errorHandler(ctx, next) {
         });
         break;
       case "ValidationError":
-        Response.error(ctx,
+        response.error(
           "BAD_REQUEST",
           {
             name: error.name,
@@ -42,7 +43,7 @@ export async function errorHandler(ctx, next) {
         );
         break;
       case "InvalidValue":
-        Response.error(ctx,
+        response.error(
           "BAD_REQUEST",
           {
             error: {
@@ -54,19 +55,16 @@ export async function errorHandler(ctx, next) {
         );
         break;
       case "NotFound":
-        Response.error(ctx,
-          "NOT_FOUND",
-          "Selected resource was not found"
-        );
+        response.notFound(error.name);
         break;
       case "methodNotAllowed":
-        Response.error(ctx,
+        response.error(
           "METHOD_NOT_ALLOWED",
           "Route does not exist."
         );
         break;
       default:
-        Response.error(ctx,
+        response.error(
           "INTERNAL_SERVER_ERROR",
           {
             error: {

@@ -2,57 +2,92 @@
  * @Author: cacaudev
  * @Date: 2020-07-03 18:13:37
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-06 12:42:43
+ * @Last Modified time: 2020-07-07 17:03:06
  */
 "use strict";
 
 import _ from "lodash";
-import { UserService } from "./user.service";
-import { paginate } from "../../utils";
-import Response from "../../utils/response";
+import { UserService } from "../services";
+import { paginate } from "../utils";
+import Response from "../utils/response";
+
+let userMock = {
+  id: "87937903-b614-4a7c-a243-3fb4b2812d3e",
+  type: "DEFAULT",
+  login_type: "EMAIL",
+  timezone: "America/Sao_Paulo",
+  created_at: "2020-07-03T22:03:07.133Z",
+  updated_at: "2020-07-03T22:03:07.133Z",
+  username: "cacautest3",
+  email: "cacau3@dev.com",
+  name: null,
+  surname: null,
+  phone: null,
+  birthdate: null,
+  avatar: null
+};
 
 class UserController {
   constructor() {
+    this.service = UserService;
     //this.userInstance = new UserService();
   }
 
   async create(ctx) {
     const userInstance = new UserService();
-    const user_data = ctx.request.body;
+    const response = new response(ctx);
+    const payload = ctx.request.body;
+
+    /* const encryptedPassword = await encryptPassword(payload.password);
+     if (encryptedPassword.error)
+       return null;
+     userInput.password = encryptedPassword;
+     */
     return await userInstance
-      .create(user_data)
+      .create(_.omit(payload, ["confirm_password"]))
       .then(async (result) => {
-        Response.created(ctx, {
+        response.created({
           user: await userInstance.serialize(result)
         });
       });
   }
   async read(ctx) {
     const userInstance = new UserService();
+    const response = new response(ctx);
+    console.log('userInstance', userInstance);
     const { userId } = ctx.params;
-    return await userInstance
-      .getById(userId)
+
+    response.success({
+      user: await userInstance.serialize(userMock)
+    });
+
+
+
+    /*return await userInstance
+      .readById(userId)
       .then(async (result) => {
         if (!result)
-          Response.notFound(ctx, "user");
+          response.notFound(ctx, "user");
         else
-          Response.success(ctx, {
+          response.success(ctx, {
             user: await userInstance.serialize(result)
           });
       });
+    }*/
   }
   async update(ctx) {
     const { userId } = ctx.params;
     const userInstance = new UserService();
+    const response = new Response(ctx);
     const user_data = ctx.request.body;
 
     return await userInstance
       .updateById(userId, user_data)
       .then(async ([updatedRows, [updatedResources]]) => {
         if (updatedRows == 0)
-          Response.notFound(ctx, "User");
+          response.notFound("User");
         else
-          Response.success(ctx, {
+          response.success({
             user: await userInstance.serialize(updatedResources)
           });
       });
@@ -60,18 +95,20 @@ class UserController {
   async delete(ctx) {
     const { userId } = ctx.params;
     const userInstance = new UserService();
+    const response = new Response(ctx);
 
     return await userInstance
       .deleteById(userId)
       .then((result) => {
         if (result == 0)
-          Response.notFound(ctx, "User");
+          response.notFound("User");
         else
-          Response.noContent(ctx, {});
+          response.noContent();
       });
   }
   async list(ctx) {
     const userInstance = new UserService();
+    const response = new Response(ctx);
     const { page, limit_by_page } = ctx.query;
     let query = {};
 
@@ -82,7 +119,7 @@ class UserController {
       .list(query)
       .then(async (users) => {
         if (users.count == 0)
-          return Response.noContent(ctx, {});
+          return response.noContent();
 
         users["rows"].map((user) => userInstance.serialize(user));
 
@@ -97,7 +134,7 @@ class UserController {
             current_page: parseInt(page)
           };
 
-        Response.success(ctx,
+        response.success(
           !_.isEmpty(query) ?
             Object.assign(pagination_info, result) :
             result
