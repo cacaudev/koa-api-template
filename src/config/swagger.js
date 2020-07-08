@@ -1,7 +1,7 @@
 'use strict';
 
 const swaggerJsdoc = require('swagger-jsdoc');
-const appInfo = require('../package.json');
+const appInfo = require('../../package.json');
 
 const info = {
   title: appInfo.name,

@@ -6,7 +6,6 @@
 "use strict";
 
 import bodyParser from "koa-bodyparser";
-import logger from "../utils";
 /**
  * Return middleware that parses HTTP request body.
  * @module body_parser
@@ -16,7 +15,7 @@ import logger from "../utils";
  * @return {function} Convert request body to JSON type
  * @throws {InvalidMediaType} When the request format is invalid.
  */
-export function requestParser(options = {}) {
+export function requestParser (options = {}) {
   return bodyParser({
     ...options,
     onerror: (error) => {
@@ -27,4 +26,3 @@ export function requestParser(options = {}) {
     parsedMethods: ["POST", "PUT", "PATCH", "DELETE"]
   });
 }
-

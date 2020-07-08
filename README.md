@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/cacaudev/koa-api-template)
+
 # Koa API Template
 REST Api template to be used on personal projects and for learning purposes.
 

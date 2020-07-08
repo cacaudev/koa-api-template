@@ -16,9 +16,8 @@ import {
   requestParser,
   errorHandler
 } from "./loaders";
-
 import baseRouter from "./api/routes/baseRouter";
-import logger from "./utils/logger";
+import logger from './loaders/logger';
 
 class App extends Koa {
   /**
@@ -78,7 +77,6 @@ class App extends Koa {
       baseRouter.routes(),
       baseRouter.allowedMethods()
     );
-
     console.log("routes: ");
     console.log(baseRouter.stack.map(i => i.path));
   }

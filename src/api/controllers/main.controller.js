@@ -1,10 +1,10 @@
 "use strict";
 
 import os from "os";
-import { LocaleService } from "../i18n/locale.service";
+import { LocaleService } from "../../i18n/locale.service";
 import swaggerSpec from "../../config/swagger";
-import appInfo from "../../package.json";
-import Response from "../utils/response";
+import appInfo from "../../../package.json";
+import Response from "../../utils/response";
 
 class MainController {
   async getApiInfo(ctx) {

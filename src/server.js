@@ -8,9 +8,9 @@
 "use strict";
 
 import chalk from "chalk";
-import config from "../config";
+import config from "./config";
 import App from "./app";
-import logger from "./utils/logger";
+import logger from "./loaders/logger";
 
 const app = new App();
 

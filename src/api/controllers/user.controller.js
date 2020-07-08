@@ -7,9 +7,9 @@
 "use strict";
 
 import _ from "lodash";
-import { UserService } from "../services";
-import { paginate } from "../utils";
-import Response from "../utils/response";
+import { UserService } from "../../services";
+import { paginate } from "../../utils";
+import Response from "../../utils/response";
 
 let userMock = {
   id: "87937903-b614-4a7c-a243-3fb4b2812d3e",

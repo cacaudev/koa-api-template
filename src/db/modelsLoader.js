@@ -11,7 +11,7 @@ import dbConnection from "./connection";
 const UserModel = require("./models/user.model");
 
 const models = {
-  User: UserModel.init(dbConnection, Sequelize),
+  //User: UserModel.init(dbConnection, Sequelize),
 };
 
 // Run `.associate` if it exists,

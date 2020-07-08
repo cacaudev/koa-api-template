@@ -15,7 +15,7 @@ import {
   hasCredentials,
   hasCreateBody,
   hasUpdateBody
-} from "../../components/users/user.middleware";
+} from "../../middlewares";
 
 const userRouter = new Router({ prefix: "/user" });
 const userController = new UserController();

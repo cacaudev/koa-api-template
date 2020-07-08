@@ -6,7 +6,7 @@
  */
 "use strict";
 import moment from "moment-timezone";
-import config from "../../config";
+import config from "../config";
 
 class DateFormatter {
   /**

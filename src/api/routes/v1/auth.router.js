@@ -17,7 +17,7 @@ const authController = new AuthController();
 
 authRouter
   .get("/token",
-    hasAuthorizationHeaders,
+    //hasAuthorizationHeaders,
     authController.signIn
   );
 

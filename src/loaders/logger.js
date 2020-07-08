@@ -5,7 +5,6 @@
  * Date: 27/09/2019
 */
 "use strict";
-
 import winston from "winston";
 
 /**
