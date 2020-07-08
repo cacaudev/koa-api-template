@@ -24,7 +24,7 @@ const options = {
   definition,
   // Path to the API specs
   apis: [
-    __dirname + '/../src/controllers/*.js',
+    __dirname + '/../src/api/controllers/*.js',
   ]
 };
 const swaggerSpec = swaggerJsdoc(options);

@@ -2,7 +2,7 @@
  * @Author: cacaudev
  * @Date: 2020-07-03 16:03:07
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-03 16:58:42
+ * @Last Modified time: 2020-07-08 09:31:18
  */
 "use strict";
 import Sequelize from "sequelize";
@@ -10,7 +10,7 @@ import chalk from "chalk";
 //import logger from "../../utils/logger";
 
 const env = process.env.NODE_ENV || "development";
-const config = require("./config.js")[env];
+const config = require("../config/db.js")[env];
 const { url, logging, dialectOptions } = config;
 
 let sequelize;

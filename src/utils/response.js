@@ -4,7 +4,7 @@
  * Date: 08/11/2019
 */
 "use strict";
-import STATUS_CODES from "../static/statusCodes";
+import STATUS_CODES from "./statusCodes";
 
 class Response {
   /**

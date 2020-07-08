@@ -17,7 +17,7 @@ import {
   errorHandler
 } from "./loaders";
 import baseRouter from "./api/routes/baseRouter";
-import logger from './loaders/logger';
+import logger from "./loaders/logger";
 
 class App extends Koa {
   /**

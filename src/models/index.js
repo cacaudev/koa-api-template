@@ -2,13 +2,13 @@
  * @Author: cacaudev
  * @Date: 2020-07-03 16:11:11
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-07 11:17:40
+ * @Last Modified time: 2020-07-08 09:24:05
  */
 "use strict";
 import Sequelize from "sequelize";
-import dbConnection from "./connection";
+import dbConnection from "../loaders/dbConnection";
 
-const UserModel = require("./models/user.model");
+const UserModel = require("./user.model");
 
 const models = {
   //User: UserModel.init(dbConnection, Sequelize),
