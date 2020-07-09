@@ -1,7 +1,7 @@
 "use strict";
 
 import os from "os";
-import { LocaleService } from "../../i18n/locale.service";
+import { LocaleService } from "../../services";
 import swaggerSpec from "../../config/swagger";
 import appInfo from "../../../package.json";
 import Response from "../../utils/response";
@@ -10,7 +10,7 @@ class MainController {
   async getApiInfo(ctx) {
     const { locale } = ctx.request.query;
     let i18n = new LocaleService(locale);
-    const response = new response(ctx);
+    let responder = new Response(ctx);
 
     const environments = {
       nodeVersion: appInfo.engines.node,
@@ -25,7 +25,7 @@ class MainController {
       environments
     };
 
-    return response.success({
+    return responder.success({
       message: i18n._t("info:welcome"),
       info: data
     });

@@ -70,6 +70,7 @@ $ npm run test
 - [x] Errors Emitter 'Layer'
 - [x] Timezone configuration
 - [x] Pagination support
+- [ ] Email Service
 - [ ] Bcrypt Authorization and Protection
 - [ ] JWT Authentication Layer
 - [ ] JSDoc/Swagger/ESDoc Documentation

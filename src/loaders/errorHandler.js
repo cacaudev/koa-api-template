@@ -5,6 +5,7 @@ export async function errorHandler(ctx, next) {
   try {
     await next();
   } catch (error) {
+    console.log('error handler', error);
     const response = new Response(ctx);
     switch (error.name) {
       case "SequelizeUniqueConstraintError":
@@ -25,6 +26,7 @@ export async function errorHandler(ctx, next) {
         });
         break;
       case "TypeError":
+        console.log('error on type error', error);
         response.error("BAD_REQUEST", {
           error: {
             name: error.name,
@@ -64,6 +66,7 @@ export async function errorHandler(ctx, next) {
         );
         break;
       default:
+        console.log('error on error handler default', error);
         response.error(
           "INTERNAL_SERVER_ERROR",
           {

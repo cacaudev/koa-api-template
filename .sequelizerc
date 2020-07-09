@@ -5,7 +5,6 @@ const path = require('path');
  * not to load models or connect to databases
  */
 module.exports = {
-  'config': path.resolve('db', 'config.js'),
-  'models-path': path.resolve('db', 'schemas'),
-  'migrations-path': path.resolve('db', 'migrations')
+  'config': path.resolve('sequelize', 'config.js'),
+  'migrations-path': path.resolve('sequelize', 'migrations')
 }

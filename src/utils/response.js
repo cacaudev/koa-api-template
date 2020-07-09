@@ -14,7 +14,7 @@ class Response {
   constructor(ctx) {
     this.ctx = ctx;
   }
-  static get STATUS_CODES() {
+  get STATUS_CODES() {
     return STATUS_CODES;
   }
   /**
@@ -22,7 +22,7 @@ class Response {
    * @param {Number} status
    * @param {Object} content
    */
-  static respond(status, content = null) {
+  respond(status, content = null) {
     this.ctx.status = status;
     this.ctx.type = "application/json";
     this.ctx.body = content;
@@ -33,9 +33,9 @@ class Response {
    * @param {*} ctx
    * @param {*} content
    * @example
-   * return Response.success(ctx, { user: userData });
+   * return Response.success({ user: userData });
    */
-  static success(content) {
+  success(content) {
     this.respond(this.STATUS_CODES.OK, content);
   }
   /**
@@ -43,14 +43,14 @@ class Response {
    * Return Response with code 201.
    * @param {object, string} content
    */
-  static created(content) {
+  created(content) {
     this.respond(this.STATUS_CODES.CREATED, content);
   }
   /**
    * @function
    * Return Response with code 204.
    */
-  static noContent() {
+  noContent() {
     this.respond(this.STATUS_CODES.NO_CONTENT);
   }
   /**
@@ -58,7 +58,7 @@ class Response {
    * Return Response with code 404.
    * @param {string} resourceName
    */
-  static notFound(resourceName) {
+  notFound(resourceName) {
     this.respond(this.STATUS_CODES.NOT_FOUND, {
       error: {
         name: "NOT_FOUND",
@@ -68,10 +68,10 @@ class Response {
     });
   }
   /**
-  * @function
+  * @method
   * Return Response with code 401.
   */
-  static unauthorized() {
+  unauthorized() {
     this.respond(this.STATUS_CODES.UNAUTHORIZED, {
       error: {
         name: "UNAUTHORIZED",
@@ -83,7 +83,7 @@ class Response {
    * @function
    * Return Response with code 405.
    */
-  static methodNotAllowed() {
+  methodNotAllowed() {
     this.respond(this.STATUS_CODES.METHOD_NOT_ALLOWED, {
       error: {
         name: "METHOD_NOT_ALLOWED",
@@ -97,12 +97,11 @@ class Response {
    * @example
    * Response.error("BAD_REQUEST", "User params are invalid");
    */
-  static error(event, content = {}) {
+  error(event, content = {}) {
     let status = this.STATUS_CODES[event] || this.ctx.status;
     if (status == 500)
       status = this.STATUS_CODES.INTERNAL_SERVER_ERROR;
     this.respond(this.STATUS_CODES[event], content);
   }
 }
-
 module.exports = Response;
