@@ -1,2 +1,2 @@
-export * from "./user.middleware";
-export * from "./global.middleware";
+export * from './userMiddleware';
+export * from './globalMiddleware';

@@ -1,3 +1,3 @@
-export * from "./user.service";
-export * from "./auth.service";
-export * from "./locale.service";
+export * from './userService';
+export * from './authService';
+export * from './localeService';

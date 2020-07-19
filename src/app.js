@@ -3,21 +3,18 @@
  * Description: App configuration file.
  * Author: Cacaudev
  * Date: 27/09/2019
-*/
-"use strict";
+ */
+'use strict';
 
-import Koa from "koa";
-import morgan from "koa-morgan";
-import cors from "@koa/cors";
-import helmet from "koa-helmet";
-import compress from "koa-compress";
+import Koa from 'koa';
+import morgan from 'koa-morgan';
+import cors from '@koa/cors';
+import helmet from 'koa-helmet';
+import compress from 'koa-compress';
 
-import {
-  requestParser,
-  errorHandler
-} from "./loaders";
-import baseRouter from "./api/routes/baseRouter";
-import logger from "./loaders/logger";
+import { requestParser, errorHandler } from './loaders';
+import baseRouter from './api/routes/baseRouter';
+import logger from './loaders/logger';
 
 class App extends Koa {
   /**
@@ -33,7 +30,7 @@ class App extends Koa {
   constructor(...params) {
     super(...params);
     this.proxy = true;
-    this.silent = this.env !== "development";
+    this.silent = this.env !== 'development';
     this.setMiddlewares();
   }
 
@@ -54,10 +51,10 @@ class App extends Koa {
     /**
      * Main app logger
      */
-    this.use(morgan("tiny", { stream: logger.stream }));
+    this.use(morgan('tiny', { stream: logger.stream }));
     /**
-    * Compress middleware for Koa
-    */
+     * Compress middleware for Koa
+     */
     this.use(compress());
     /**
      * Error middleware
@@ -66,19 +63,18 @@ class App extends Koa {
     /**
      * Parse request payload
      */
-    this.use(requestParser({
-      enableTypes: ["json"],
-      jsonLimit: "5mb"
-    }));
+    this.use(
+      requestParser({
+        enableTypes: ['json'],
+        jsonLimit: '5mb',
+      })
+    );
     /**
      * Load API routes
      */
-    this.use(
-      baseRouter.routes(),
-      baseRouter.allowedMethods()
-    );
-    console.log("routes: ");
-    console.log(baseRouter.stack.map(i => i.path));
+    this.use(baseRouter.routes(), baseRouter.allowedMethods());
+    console.log('routes: ');
+    console.log(baseRouter.stack.map((i) => i.path));
   }
 }
 

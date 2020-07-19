@@ -2,7 +2,7 @@
  * @Author: cacaudev
  * @Date: 2020-07-07 10:29:00
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-07 11:35:01
+ * @Last Modified time: 2020-07-09 11:59:51
  */
 class Service {
   /**
@@ -14,30 +14,27 @@ class Service {
   constructor(model) {
     this.model = model;
   }
-  static async create(payload = {}) {
+  async create(payload = {}) {
     return await this.model.create(payload);
   }
   async readById(resourceId = 0) {
     return await this.model.findByPk(resourceId, { raw: true });
   }
-  static async updateById(resourceId, payload) {
-    return await this.model.update(
-      payload,
-      {
-        returning: true, // Return the resource record updated
-        where: { id: resourceId },
-        raw: true
-      }
-    );
+  async updateById(resourceId, payload) {
+    return await this.model.update(payload, {
+      returning: true, // Return the resource record updated
+      where: { id: resourceId },
+      raw: true,
+    });
   }
-  static async deleteById(resourceId) {
+  async deleteById(resourceId) {
     return await this.model.destroy({ where: { id: resourceId } });
   }
-  static async list({ offset = 0, limit = 1000 }) {
+  async list({ offset = 0, limit = 1000 }) {
     return await this.model.findAndCountAll({
       offset,
       limit,
-      raw: true
+      raw: true,
     });
   }
 }

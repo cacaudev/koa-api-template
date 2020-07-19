@@ -4,7 +4,7 @@
  * @Last Modified by: cacaudev
  * @Last Modified time: 2020-07-08 09:36:30
  */
-"use strict";
+'use strict';
 
 /**
  * @des Generate pagination range

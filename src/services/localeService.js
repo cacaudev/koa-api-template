@@ -3,11 +3,11 @@
  * Description: Locale service file.
  * Author: Cacaudev
  * Date: 01/11/2019
-*/
+ */
 
-"use strict";
+'use strict';
 
-const i18next = require("../i18n/config");
+const i18next = require('../i18n/config');
 
 class LocaleService {
   /**
@@ -18,7 +18,7 @@ class LocaleService {
    * @example
    * let i18nService = new LocaleService("en");
    */
-  constructor(locale = "en") {
+  constructor(locale = 'en') {
     this.i18nProvider = i18next;
     this.setLocale(locale);
   }

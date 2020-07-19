@@ -2,8 +2,8 @@
  * Description: Http status codes.
  * Author: Cacaudev
  * Date: 08/11/2019
-*/
-"use strict";
+ */
+'use strict';
 
 /**
  * HTTP Status codes
@@ -30,5 +30,5 @@ module.exports = {
   NOT_IMPLEMENTED: 501,
   BAD_GATEWAY: 502,
   SERVICE_UNAVAILABLE: 503,
-  GATEWAY_TIMEOUT: 504
+  GATEWAY_TIMEOUT: 504,
 };

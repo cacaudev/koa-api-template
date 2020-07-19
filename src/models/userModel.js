@@ -1,4 +1,4 @@
-import Sequelize, { Model } from "sequelize";
+import Sequelize, { Model } from 'sequelize';
 
 class User extends Model {
   static init(sequelize) {
@@ -7,18 +7,18 @@ class User extends Model {
         allowNull: false,
         type: Sequelize.UUID,
         primaryKey: true,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: Sequelize.UUIDV4,
       },
       username: {
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING(128)
+        type: Sequelize.STRING(128),
       },
       password: Sequelize.STRING(288),
       email: {
         type: Sequelize.STRING(256),
         allowNull: false,
-        unique: true
+        unique: true,
       },
       name: Sequelize.STRING(128),
       surname: Sequelize.STRING(128),
@@ -27,31 +27,31 @@ class User extends Model {
       avatar: Sequelize.STRING(128),
       type: {
         type: Sequelize.ENUM,
-        values: ["DEFAULT", "ADMIN"],
-        defaultValue: "DEFAULT"
+        values: ['DEFAULT', 'ADMIN'],
+        defaultValue: 'DEFAULT',
       },
       login_type: {
         type: Sequelize.ENUM,
-        values: ["EMAIL", "GOOGLE", "FACEBOOK"],
-        defaultValue: "EMAIL"
+        values: ['EMAIL', 'GOOGLE', 'FACEBOOK'],
+        defaultValue: 'EMAIL',
       },
       timezone: {
         type: Sequelize.STRING,
-        defaultValue: "America/Sao_Paulo"
+        defaultValue: 'America/Sao_Paulo',
       },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW()
+        defaultValue: Sequelize.NOW(),
       },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW()
-      }
+        defaultValue: Sequelize.NOW(),
+      },
     };
     const options = {
-      tableName: "user",
+      tableName: 'user',
       // disable the modification of tablenames; By default, sequelize will automatically
       // transform all passed model names (first parameter of define) into plural.
       // if you don't want that, set the following
@@ -60,20 +60,20 @@ class User extends Model {
       // so updatedAt will be updated_at
       underscored: true,
       createdAt: false,
-      updatedAt: false
+      updatedAt: false,
     };
     return super.init(userSchema, {
       ...options,
-      sequelize
+      sequelize,
     });
   }
-  static associate(models) { }
+  // static associate(models) {}
   // static queries for model
   static getId(where) {
     return this.findOne({
       where,
-      attributes: ["id"],
-      order: [["createdAt", "DESC"]]
+      attributes: ['id'],
+      order: [['createdAt', 'DESC']],
     });
   }
 }

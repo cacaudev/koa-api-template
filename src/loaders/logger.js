@@ -3,19 +3,19 @@
  * Description: Logger startup module.
  * Author: cacaudev
  * Date: 27/09/2019
-*/
-"use strict";
-import winston from "winston";
+ */
+'use strict';
+import winston from 'winston';
 
 /**
  * Instantiate an Winston Logger.
  * @module Logger
  */
-var logger = winston.createLogger({
+let logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
-      format: winston.format.simple()
-    })
+      format: winston.format.simple(),
+    }),
   ],
   exitOnError: false,
 });
@@ -31,7 +31,7 @@ var logger = winston.createLogger({
  */
 logger.stream = {
   write: function (message) {
-    logger.info(message.substring(0, message.lastIndexOf("\n")));
+    logger.info(message.substring(0, message.lastIndexOf('\n')));
   },
 };
 

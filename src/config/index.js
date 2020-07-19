@@ -3,7 +3,7 @@
  * Description: Env variables configuration file.
  * Author: Cacaudev
  * Date: 07/10/2019
-*/
+ */
 
 'use strict';
 
@@ -11,7 +11,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config({
-  path: path.resolve(__dirname + '/.env')
+  path: path.resolve(__dirname + '/.env'),
 });
 
 /**
@@ -31,25 +31,22 @@ const app_config = {
     env,
     port: process.env.PORT || 3000,
     api: {
-      prefix: '/v1'
+      prefix: '/v1',
     },
     auth: {
       bcrypt_cost: process.env.BCRYPT_COST,
-      jwt_secret: process.env.JWT_SECRET
+      jwt_secret: process.env.JWT_SECRET,
     },
-    date_format_default: 'YYYY/MM/DD HH:MM:SS'
+    date_format_default: 'YYYY/MM/DD HH:MM:SS',
   },
   development: {
     port: process.env.PORT || 8080,
   },
   test: {
     port: process.env.PORT || 5000,
-  }
+  },
 };
 
-const config = Object.assign(
-  app_config.base,
-  app_config[env]
-);
+const config = Object.assign(app_config.base, app_config[env]);
 
 module.exports = config;

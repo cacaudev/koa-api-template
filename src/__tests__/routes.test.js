@@ -3,7 +3,7 @@
  * Description: Main Route test pilot.
  * Author: Cacaudev
  * Date: 22/11/2019
-*/
+ */
 import request from 'supertest';
 import App from '../app';
 
@@ -31,8 +31,7 @@ afterAll(() => {
 
 describe('Test starting', () => {
   test('Access API Homepage ', async () => {
-    const response_body = await agent
-      .get('/v1');
+    const response_body = await agent.get('/v1');
     expect(response_body.status).toEqual(200);
     expect(response_body.text).toContain('Welcome to koa api template');
   });

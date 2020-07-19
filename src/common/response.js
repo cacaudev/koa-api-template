@@ -2,9 +2,9 @@
  * Description: Response object.
  * Author: Cacaudev
  * Date: 08/11/2019
-*/
-"use strict";
-import STATUS_CODES from "./statusCodes";
+ */
+'use strict';
+import STATUS_CODES from './statusCodes';
 
 class Response {
   /**
@@ -24,7 +24,7 @@ class Response {
    */
   respond(status, content = null) {
     this.ctx.status = status;
-    this.ctx.type = "application/json";
+    this.ctx.type = 'application/json';
     this.ctx.body = content;
     return;
   }
@@ -61,22 +61,22 @@ class Response {
   notFound(resourceName) {
     this.respond(this.STATUS_CODES.NOT_FOUND, {
       error: {
-        name: "NOT_FOUND",
+        name: 'NOT_FOUND',
         resource: resourceName,
-        message: "Selected resource was not found"
-      }
+        message: 'Selected resource was not found',
+      },
     });
   }
   /**
-  * @method
-  * Return Response with code 401.
-  */
+   * @method
+   * Return Response with code 401.
+   */
   unauthorized() {
     this.respond(this.STATUS_CODES.UNAUTHORIZED, {
       error: {
-        name: "UNAUTHORIZED",
-        message: "Route requires authorization"
-      }
+        name: 'UNAUTHORIZED',
+        message: 'Route requires authorization',
+      },
     });
   }
   /**
@@ -86,9 +86,9 @@ class Response {
   methodNotAllowed() {
     this.respond(this.STATUS_CODES.METHOD_NOT_ALLOWED, {
       error: {
-        name: "METHOD_NOT_ALLOWED",
-        message: "REST Method not allowed"
-      }
+        name: 'METHOD_NOT_ALLOWED',
+        message: 'REST Method not allowed',
+      },
     });
   }
   /**
@@ -99,8 +99,7 @@ class Response {
    */
   error(event, content = {}) {
     let status = this.STATUS_CODES[event] || this.ctx.status;
-    if (status == 500)
-      status = this.STATUS_CODES.INTERNAL_SERVER_ERROR;
+    if (status == 500) status = this.STATUS_CODES.INTERNAL_SERVER_ERROR;
     this.respond(this.STATUS_CODES[event], content);
   }
 }

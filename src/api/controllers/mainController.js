@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-import os from "os";
-import { LocaleService } from "../../services";
-import swaggerSpec from "../../config/swagger";
-import appInfo from "../../../package.json";
-import Response from "../../utils/response";
+import os from 'os';
+import { LocaleService } from '../../services';
+import swaggerSpec from '../../config/swagger';
+import appInfo from '../../../package.json';
+import Response from '../../common/response';
 
 class MainController {
   async getApiInfo(ctx) {
@@ -16,31 +16,34 @@ class MainController {
       nodeVersion: appInfo.engines.node,
       npmVersion: appInfo.engines.npm,
       hostname: os.hostname(),
-      platform: `${process.platform}/${process.arch}`
+      platform: `${process.platform}/${process.arch}`,
     };
     const data = {
       name: appInfo.name,
       version: appInfo.version,
       description: appInfo.description,
-      environments
+      environments,
     };
 
     return responder.success({
-      message: i18n._t("info:welcome"),
-      info: data
+      message: i18n._t('info:welcome'),
+      info: data,
     });
   }
 
   async status(ctx) {
     const response = new response(ctx);
     return response.success({
-      services: [{
-        name: "auth",
-        status: "ok"
-      }, {
-        name: "dashboard",
-        status: "ok"
-      }]
+      services: [
+        {
+          name: 'auth',
+          status: 'ok',
+        },
+        {
+          name: 'dashboard',
+          status: 'ok',
+        },
+      ],
     });
   }
 

@@ -8,7 +8,7 @@ const info = {
   description: appInfo.description,
   version: appInfo.version,
   contact: appInfo.author,
-  termsOfService: ''
+  termsOfService: '',
 };
 const servers = [];
 
@@ -16,16 +16,14 @@ const servers = [];
 const definition = {
   openapi: '3.0.0',
   info,
-  servers
+  servers,
 };
 
 // Options for the swagger specification
 const options = {
   definition,
   // Path to the API specs
-  apis: [
-    __dirname + '/../src/api/controllers/*.js',
-  ]
+  apis: [__dirname + '/../src/api/controllers/*.js'],
 };
 const swaggerSpec = swaggerJsdoc(options);
 

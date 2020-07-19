@@ -5,32 +5,25 @@
  * @Last Modified time: 2020-07-08 09:33:06
  */
 
-"use strict";
+'use strict';
 
-import validator, { Joi } from "koa-context-validator";
+import validator, { Joi } from 'koa-context-validator';
 
 const hasPaginationParams = validator({
   query: Joi.object().keys({
-    page: Joi.number()
-      .positive(),
-    limit_by_page: Joi.number()
-      .positive()
-  })
+    page: Joi.number().positive(),
+    limit_by_page: Joi.number().positive(),
+  }),
 });
 
 const hasAuthorizationHeaders = validator({
   headers: Joi.object({
-    "authorization": Joi.string()
-      .max(128)
-      .required(),
+    authorization: Joi.string().max(128).required(),
   }).options({
     // ! This option enables inclusion from other
     // ! types of headers, but validates only the ones above
-    allowUnknown: true
+    allowUnknown: true,
   }),
 });
 
-export {
-  hasPaginationParams,
-  hasAuthorizationHeaders
-};
+export { hasPaginationParams, hasAuthorizationHeaders };
