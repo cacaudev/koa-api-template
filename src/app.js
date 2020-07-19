@@ -31,7 +31,7 @@ class App extends Koa {
     super(...params);
     this.proxy = true;
     this.silent = this.env !== 'development';
-    this.setMiddlewares();
+    this.applyMiddlewares();
   }
 
   /**
@@ -39,7 +39,7 @@ class App extends Koa {
    * The call order is important.
    * @method
    */
-  setMiddlewares() {
+  applyMiddlewares() {
     /**
      * Enable Cross Origin Resource Sharing to all origins by default
      */

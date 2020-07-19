@@ -1,3 +1,3 @@
 export * from './userService';
 export * from './authService';
-export * from './localeService';
+export * from './i18n/localeService';

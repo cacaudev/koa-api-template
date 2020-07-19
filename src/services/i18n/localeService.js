@@ -7,7 +7,7 @@
 
 'use strict';
 
-const i18next = require('../i18n/config');
+import i18next from './config';
 
 class LocaleService {
   /**
