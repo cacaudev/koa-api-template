@@ -8,9 +8,9 @@
 'use strict';
 
 import Router from 'koa-router';
-import { MainController } from '../controllers';
-import v1Router from './v1';
-import Response from '../../common/response';
+import { MainController } from '@controllers';
+import v1Router from './v1/v1Router';
+import Response from '@common/response';
 
 const baseRouter = new Router();
 const mainController = new MainController();

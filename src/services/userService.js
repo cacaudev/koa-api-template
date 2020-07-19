@@ -2,12 +2,12 @@
  * @Author: cacaudev
  * @Date: 2020-07-03 17:13:21
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-19 18:48:21
+ * @Last Modified time: 2020-07-19 20:02:48
  */
 'use strict';
 
 // import * as _ from 'lodash';
-import { User } from '../models';
+import { User } from '@models';
 // import { DateFormatter } from '../common';
 import Service from './service';
 

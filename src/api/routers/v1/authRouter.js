@@ -7,8 +7,8 @@
 'use strict';
 
 import Router from 'koa-router';
-import { hasAuthorizationHeaders } from '../../middlewares';
-import { AuthController } from '../../controllers';
+import { hasAuthorizationHeaders } from '@middlewares';
+import { AuthController } from '@controllers';
 
 const authRouter = new Router({ prefix: '/auth' });
 const authController = new AuthController();

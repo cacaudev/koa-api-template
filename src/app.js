@@ -13,7 +13,7 @@ import helmet from 'koa-helmet';
 import compress from 'koa-compress';
 
 import { requestParser, errorHandler } from './loaders';
-import baseRouter from './api/routes/baseRouter';
+import baseRouter from '@routers/baseRouter';
 import logger from './loaders/logger';
 
 class App extends Koa {
@@ -73,8 +73,8 @@ class App extends Koa {
      * Load API routes
      */
     this.use(baseRouter.routes(), baseRouter.allowedMethods());
-    console.log('routes: ');
-    console.log(baseRouter.stack.map((i) => i.path));
+    //console.log('routes: ');
+    //console.log(baseRouter.stack.map((i) => i.path));
   }
 }
 

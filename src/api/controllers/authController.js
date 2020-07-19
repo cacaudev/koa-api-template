@@ -5,8 +5,8 @@
  */
 'use strict';
 
-import { AuthService } from '../../services';
-import Response from '../../common/response';
+import { AuthService } from '@services';
+import Response from '@common/response';
 
 class AuthController {
   async signIn(ctx) {

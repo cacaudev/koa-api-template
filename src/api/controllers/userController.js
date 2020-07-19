@@ -2,14 +2,13 @@
  * @Author: cacaudev
  * @Date: 2020-07-03 18:13:37
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-19 18:44:38
+ * @Last Modified time: 2020-07-19 20:01:00
  */
 'use strict';
 
 import _ from 'lodash';
-import { UserService } from '../../services';
-import { paginate } from '../../common';
-import Response from '../../common/response';
+import { UserService } from '@services';
+import { paginate, Response } from '@common';
 // import { User } from '../../models';
 
 let userMock = {

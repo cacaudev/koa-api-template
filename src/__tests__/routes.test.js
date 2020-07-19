@@ -1,38 +1,25 @@
-/* eslint-disable no-undef */
 /*
  * Description: Main Route test pilot.
  * Author: Cacaudev
  * Date: 22/11/2019
  */
-import request from 'supertest';
+import supertest from 'supertest';
+import http from 'http';
 import App from '../app';
 
-let server, agent;
+/*
+ * OBS: Using http.createServer() as workaround
+ * for supertest need for http.Server to work on.
+ * Calling app.listen() to get a server will
+ * start a listening server, this is bad
+ * practice and unnecessary.
+ */
 
-beforeEach((done) => {
-  const app = new App();
-  server = app.listen(4000, (err) => {
-    if (err) return done(err);
-    agent = request.agent(server);
+describe('Integration App Test', () => {
+  test('[GET] /', (done) => {
+    const app = new App();
+    const apptest = supertest(http.createServer(app.callback()));
+    apptest.get('/').expect(200);
     done();
-  });
-});
-
-afterEach((done) => {
-  return server && server.close(done);
-});
-
-afterAll(() => {
-  /**
-   * Avoid port already in use error
-   */
-  server.close();
-});
-
-describe('Test starting', () => {
-  test('Access API Homepage ', async () => {
-    const response_body = await agent.get('/v1');
-    expect(response_body.status).toEqual(200);
-    expect(response_body.text).toContain('Welcome to koa api template');
   });
 });

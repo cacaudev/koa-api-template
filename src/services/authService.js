@@ -2,12 +2,12 @@
  * @Author: cacaudev
  * @Date: 2020-07-07 11:10:36
  * @Last Modified by: cacaudev
- * @Last Modified time: 2020-07-09 12:00:08
+ * @Last Modified time: 2020-07-19 20:02:27
  */
 'use strict';
 
 import jwt from 'jsonwebtoken';
-import config from '../config';
+import config from '@config/index';
 import bcrypt from 'bcryptjs';
 
 class AuthService {

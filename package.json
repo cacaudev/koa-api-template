@@ -1,7 +1,7 @@
 {
   "name": "koa-api-template",
   "version": "1.0.0",
-  "description": "Content Sytem Management build with Koa + Sequelize + NodeJS.",
+  "description": "Content System Management build with Koa + Sequelize + NodeJS.",
   "main": "server.js",
   "engines": {
     "node": "10.17.0",
@@ -69,10 +69,12 @@
     "@babel/preset-env": "^7.6.2",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "cross-env": "^7.0.2",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import-helpers": "^1.1.0",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "jest": "^24.9.0",
@@ -84,10 +86,5 @@
     "sequelize-mock": "^0.10.2",
     "supertest": "^4.0.2",
     "toast-jsdoc": "^1.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick — staged && npm run lint"
-    }
   }
 }
