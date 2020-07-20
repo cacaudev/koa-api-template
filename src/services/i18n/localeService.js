@@ -34,14 +34,6 @@ class LocaleService {
   }
 
   /**
-   *
-   * @returns string[] The list of available locale codes
-   */
-  /*getLocales() {
-    return this.i18nProvider.getLocales();
-  }*/
-
-  /**
    * @method
    * @param locale The locale to set. Must be from the list of available locales.
    * @example

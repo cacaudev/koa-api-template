@@ -28,5 +28,4 @@ var options = {
 };
 
 i18next.init(options);
-
-module.exports = i18next;
+export default i18next;

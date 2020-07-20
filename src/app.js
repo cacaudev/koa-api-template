@@ -17,35 +17,19 @@ import baseRouter from '@routers/baseRouter';
 import logger from './loaders/logger';
 
 class App extends Koa {
-  /**
-   * @summary Create an Koa App instance.
-   * @class
-   * @property {boolean} proxy - Proxy header fields will be trusted
-   * @property {string} silent - Disable `console.errors` except in development env
-   * @returns {App} App instance
-   *
-   * @example
-   * const app = new App();
-   */
   constructor(...params) {
     super(...params);
     this.proxy = true;
     this.silent = this.env !== 'development';
     this.applyMiddlewares();
   }
-
-  /**
-   * @desc Middlewares that will be executed before the controllers.
-   * The call order is important.
-   * @method
-   */
   applyMiddlewares() {
     /**
      * Enable Cross Origin Resource Sharing to all origins by default
      */
     this.use(cors());
     /**
-     * Basic node security
+     * Basic nodejs security
      */
     this.use(helmet());
     /**
@@ -56,25 +40,14 @@ class App extends Koa {
      * Compress middleware for Koa
      */
     this.use(compress());
-    /**
-     * Error middleware
-     */
     this.use(errorHandler);
-    /**
-     * Parse request payload
-     */
     this.use(
       requestParser({
         enableTypes: ['json'],
         jsonLimit: '5mb',
       })
     );
-    /**
-     * Load API routes
-     */
     this.use(baseRouter.routes(), baseRouter.allowedMethods());
-    //console.log('routes: ');
-    //console.log(baseRouter.stack.map((i) => i.path));
   }
 }
 

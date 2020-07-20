@@ -20,12 +20,10 @@ app.on('error', (err) => {
 
 const server = app.listen(config.port, () => {
   // Server Info
-  logger.info(
-    chalk.greenBright(`\n-------\nServer:
+  logger.info(`\n-------\nServer:
     mode: [${chalk.magentaBright(`${config.env}`)}]
     url: ${chalk.blueBright(`http://localhost:${config.port}`)}
-    ${chalk.black.bgGreenBright('Koa API is ready!')}\n-------`)
-  );
+   Koa API is ready!\n-------`);
 });
 
 server.on('error', (err) => {
@@ -33,7 +31,7 @@ server.on('error', (err) => {
     chalk.redBright(`\n-------
     Error starting Koa Server:
     Code: [${chalk.magentaBright(`${err.code}`)}]
-    Port: [${chalk.magentaBright(`${err.port}`)}]
+    Port: [${chalk.magentaBright(`${config.port}`)}]
     Server shutting down.}\n-------
     `)
   );
